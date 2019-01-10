@@ -13,11 +13,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-app.set('port', (process.env.PORT || 5000));
+// app.set('port', (process.env.PORT || 5000)); // is this really required?
 app.use(express.static(__dirname + '/public'));
 
 app.post('/', function(req, res) {
-  console.log("app post /", req);
+  console.log("app post /");
   dialogflowModule.handleRequest(req).then((responseJSON) => {
     res.send(responseJSON);
     console.log("responding with" + responseJSON);
@@ -25,7 +25,7 @@ app.post('/', function(req, res) {
 })
 
 app.get('/', function(req, res) {
-  console.log("app get /", req);
+  console.log("app get /");
   res.send('Hullo!\n<a href="https://github.com/Yin-Yin/kanji-bot">Kanji Ro-Bot</a>');
 });
 
