@@ -8,6 +8,7 @@ const { Request } = require('request');
 
 module.exports = {
     handleRequest: (request, response) => {
+        console.log("handleRequest invoked");
         return new Promise((resolve, reject) => {
             const agent = new WebhookClient({ request, response });
             console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
