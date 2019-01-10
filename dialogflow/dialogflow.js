@@ -62,10 +62,21 @@ module.exports = {
             intentMap.set('kanji.explain', kanjiExplain);
             // intentMap.set('your intent name here', yourFunctionHandler);
             // intentMap.set('your intent name here', googleAssistantHandler);
-            agent.handleRequest(intentMap);
+            agent.handleRequest(intentMap); 
+            // toDo: we need to figure out, how the agent works. Currently we get an rejected promise error. We need to resolve the promise and reject it in case of an error
+            //  - How can we utilize the agent?
+            //  - what does the handleRequest function from the agent do?
+            //  - Where do we reject/resolve the promise?
             console.log("agent: ", agent.handleRequest(intentMap));
             
-
+            // *sigh* //
+            let agentRespone = agent.handleRequest(intentMap);
+            resolve(agentRespone);
+            // *sigh end*
+            
+            reject({ "test": true});
+            
+            
             // http requests
             function makeHttpsRequest() {
                 Request('https://kanjialive-api.p.rapidapi.com/api/public/search/advanced/?on=%E3%82%B7', { "X-RapidAPI-Key": process.env.rapidapi_key }, (err, res, body) => {
@@ -74,12 +85,6 @@ module.exports = {
                     console.log(body.explanation);
                 });
             };
-            
-            
-            // *sigh* //
-            let agentRespone = agent.handleRequest(intentMap);
-            resolve(agentRespone);
-            // *sigh end*
 
 
         });
