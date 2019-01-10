@@ -17,19 +17,15 @@ app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 
 app.post('/', function(req, res) {
-  console.log("app post /");
-  
-    res.send({
-        "test": true
-    });/*
+  console.log("app post /", req);
   dialogflowModule.handleRequest(req).then((responseJSON) => {
     res.send(responseJSON);
     console.log("responding with" + responseJSON);
-  });*/
+  });
 })
 
 app.get('/', function(req, res) {
-  console.log("app get /");
+  console.log("app get /", req);
   res.send('Hullo!');
 });
 
