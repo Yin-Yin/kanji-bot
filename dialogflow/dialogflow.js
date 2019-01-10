@@ -64,7 +64,10 @@ module.exports = {
             // intentMap.set('your intent name here', googleAssistantHandler);
             agent.handleRequest(intentMap);
             console.log("agent: ", agent.handleRequest(intentMap));
-
+            // *sigh* //
+            let agentRespone = agent.handleRequest(intentMap);
+            resolve(agentRespone);
+            // *sigh end*
 
             // http requests
             function makeHttpsRequest() {
