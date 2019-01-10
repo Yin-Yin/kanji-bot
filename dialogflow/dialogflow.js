@@ -11,7 +11,7 @@ module.exports = {
         console.log("handleRequest invoked");
         return new Promise((resolve, reject) => {
 
-            const agent = new WebhookClient({ request, response });
+            // const agent = new WebhookClient({ request, response });
             console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
             console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
             

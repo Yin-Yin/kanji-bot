@@ -20,7 +20,7 @@ app.post('/', function(req, res) {
   console.log("app post /");
   dialogflowModule.handleRequest(req).then((responseJSON) => {
     res.send(responseJSON);
-    console.log("responding with" + responseJSON);
+    console.log("responding with ", responseJSON);
   });
 })
 
