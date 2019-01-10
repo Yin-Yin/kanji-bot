@@ -19,10 +19,18 @@ app.use(express.static(__dirname + '/public'));
 app.post('/', function(req, res) {
   console.log("app post /");
   dialogflowModule.handleRequest(req).then((responseJSON) => {
-    res.send(responseJSON); 
+    //res.send(responseJSON);
+    res.send({
+        "test": true
+    });
     console.log("responding with" + responseJSON);
   });
 })
+
+app.get('/', function(req, res) {
+  console.log("app get /");
+  res.send('Hullo!');
+});
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
