@@ -9,7 +9,7 @@ const { Request } = require('request');
 module.exports = {
     handleRequest: (request, response) => {
         console.log("handleRequest invoked");
-        return new Promise((resolve, reject) => {
+        //return new Promise((resolve, reject) => {
             const agent = new WebhookClient({ request, response });
             console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
             console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
@@ -72,10 +72,10 @@ module.exports = {
             
             // *sigh* //
             let agentRespone = agent.handleRequest(intentMap);
-            resolve(agentRespone);
+            //resolve(agentRespone);
             // *sigh end*
             
-            reject({ "test": true});
+            //reject({ "test": true});
             
             
             // http requests
@@ -88,7 +88,7 @@ module.exports = {
             };
 
 
-        });
+        //});
 
     }
 };
