@@ -26,7 +26,7 @@ app.post('/', function(req, res) {
 
 app.get('/', function(req, res) {
   console.log("app get /");
-  res.send('Hullo!\n<a href="https://github.com/Yin-Yin/kanji-bot">Kanji Ro-Bot</a>');
+  res.send('Hullo!\n <a href="https://github.com/Yin-Yin/kanji-bot">Kanji Ro-Bot</a>');
 });
 
 app.listen(app.get('port'), function() {
