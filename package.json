@@ -1,0 +1,37 @@
+{
+  "name": "kanji-bot",
+  "version": "1.0.0",
+  "description": "Backend for dialog flow chatbot to study Kanjis",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yin-Yin/kanji-bot.git"
+  },
+  "keywords": [
+    "kanji",
+    "chatbot",
+    "bot",
+    "japanese",
+    "study",
+    "learn"
+  ],
+  "author": "Yin-Yin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yin-Yin/kanji-bot/issues"
+  },
+  "homepage": "https://github.com/Yin-Yin/kanji-bot#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0"
+  },
+  "dependencies": {
+    "actions-on-google": "^2.5.0",
+    "body-parser": "^1.18.3",
+    "dialogflow-fulfillment": "^0.6.1",
+    "express": "^4.16.4"
+  }
+}
