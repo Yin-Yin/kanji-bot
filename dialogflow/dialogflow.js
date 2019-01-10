@@ -15,6 +15,8 @@ module.exports = {
             console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
             console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
             
+            console.log("new WebhookClient({ request, response })", new WebhookClient({ request, response }));
+            
             resolve({ "test": true });
             
             /*
