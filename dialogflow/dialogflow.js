@@ -10,6 +10,8 @@ module.exports = {
     handleRequest: (request, response) => {
         console.log("handleRequest invoked");
         return new Promise((resolve, reject) => {
+            resolve({ "test": true});
+            /*
             const agent = new WebhookClient({ request, response });
             console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
             console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
@@ -86,6 +88,8 @@ module.exports = {
                     console.log(body.explanation);
                 });
             };
+            
+            */
 
 
         });
