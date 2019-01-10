@@ -25,7 +25,7 @@ module.exports = {
             }
 
             function kanjiExplain(agent) {
-                makeHttpsRequest();
+                //makeHttpsRequest();
                 agent.add(`Your Kanji is ` + request.body.queryResult.parameters.kanji);
             }
 
