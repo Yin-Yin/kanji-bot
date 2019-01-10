@@ -11,17 +11,11 @@ module.exports = {
         console.log("handleRequest invoked");
         return new Promise((resolve, reject) => {
 
-            // const agent = new WebhookClient({ request, response });
+            const agent = new WebhookClient({ request, response });
             console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
             console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
             
-            console.log("new WebhookClient({ request, response })", new WebhookClient({ request, response }));
-            
-            resolve({ "test": true });
-            
-            /*
-            
-            function welcome(agent) {
+                        function welcome(agent) {
                 agent.add(`Welcome to my agent!`);
             }
 
@@ -93,8 +87,6 @@ module.exports = {
                     console.log(body.explanation);
                 });
             };
-            
-            */
 
 
         });
