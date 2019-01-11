@@ -25,7 +25,7 @@ module.exports = {
             }
 
             function kanjiExplain(agent) {
-                //makeHttpsRequest();
+                makeHttpsRequest();
                 agent.add(`Your Kanji is ` + request.body.queryResult.parameters.kanji);
             }
 
@@ -82,7 +82,7 @@ module.exports = {
 
             //reject({ "test": true});
 
-            /*
+            
             // http requests
             function makeHttpsRequest() {
                 Request('https://kanjialive-api.p.rapidapi.com/api/public/search/advanced/?on=%E3%82%B7', { "X-RapidAPI-Key": process.env.rapidapi_key }, (err, res, body) => {
@@ -91,7 +91,7 @@ module.exports = {
                     console.log(body.explanation);
                 });
             };
-            */
+            
 
 
         //});
