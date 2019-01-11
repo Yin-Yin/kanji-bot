@@ -44,8 +44,8 @@ module.exports = {
                         console.log("resData.kanji.character", resData.kanji.character);
                         agent.add("Kanji: " + resData.kanji.character);
                         agent.add("Meaning: " + resData.kanji.meaning.english);
-                        agent.add("Onyomi: " + resData.kanji.onyomi.romaji + " / " + resData.kanji.onyomi.katakana);
-                        agent.add("Kunyomi: " + resData.kanji.kunyomi.romaji + " / " + resData.kanji.kunyomi.katakana);
+                        agent.add("Onyomi: " + resData.kanji.onyomi.katakana + " (" + resData.kanji.onyomi.romaji + ")");
+                        agent.add("Kunyomi: " + resData.kanji.kunyomi.hiragana  + " (" + resData.kanji.kunyomi.romaji + ")");
                         // agent.add("Example:" + resData.kanji.examples[0].japanese);
                         resolve();
                     }
