@@ -36,24 +36,21 @@ module.exports = {
         }
 
         function kanjiExplain(agent) {
-            return new Promise((resolve, reject) => { // this is the workaround
+            return new Promise((resolve, reject) => {
                 optionsKanjialiveRapidapi.path = '/api/public/kanji/' + encodeURIComponent(request.body.queryResult.parameters.kanji_single);
-                console.log("optionsKanjialiveRapidapi", optionsKanjialiveRapidapi);
                 makeHttpsRequest(optionsKanjialiveRapidapi).then(
                     resData => {
                         console.log("resData", resData);
-                        
                         console.log("resData.kanji.character", resData.kanji.character);
-                        agent.add("Kanji", resData.kanji.character);
-                        agent.add("meaning", resData.kanji.meaning);
-                        agent.add("onyomi", resData.kanji.onyomi);
-                        agent.add("kunyomi", resData.kanji.kunyomi);
-                        agent.add("examples", resData.kanji.examples);
-                        resolve(); // this is for the workaround
+                        agent.add("Kanji" + resData.kanji.character);
+                        agent.add("meaning" + resData.kanji.meaning);
+                        agent.add("onyomi" + resData.kanji.onyomi);
+                        agent.add("kunyomi" + resData.kanji.kunyomi);
+                        agent.add("examples" + resData.kanji.examples);
+                        resolve();
                     }
                 );
             });
-            //agent.add(`Your Kanji is ` + request.body.queryResult.parameters.kanji_single);
         }
 
         // Uncomment and edit to make your own intent handler
