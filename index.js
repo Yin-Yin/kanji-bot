@@ -18,10 +18,13 @@ app.use(express.static(__dirname + '/public'));
 
 app.post('/', function(req, res) {
   console.log("app post /");
-  dialogflowModule.handleRequest(req, res).then((responseJSON) => {
+  dialogflowModule.handleRequest(req, res);
+  /*
+  .then((responseJSON) => {
     res.send(responseJSON);
     console.log("responding with ", responseJSON);
   });
+  */
 })
 
 app.get('/', function(req, res) {

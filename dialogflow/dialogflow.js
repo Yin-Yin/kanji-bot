@@ -9,11 +9,11 @@ const { Request } = require('request');
 module.exports = {
     handleRequest: (request, response) => {
         console.log("handleRequest invoked");
-        return new Promise((resolve, reject) => {
+        //return new Promise((resolve, reject) => {
 
             const agent = new WebhookClient({ request, response });
-            console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
-            console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
+            //console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
+            //console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
 
             function welcome(agent) {
                 agent.add(`Welcome to my agent!`);
@@ -69,17 +69,20 @@ module.exports = {
             //  - How can we utilize the agent?
             //  - what does the handleRequest function from the agent do?
             //  - Where do we reject/resolve the promise?
+            //  - original line is :  exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response) => {
+            //  - from the firebase docs_: https://firebase.google.com/docs/functions/http-events
+            //  - explaining express: https://stackoverflow.com/questions/7042340/error-cant-set-headers-after-they-are-sent-to-the-client 
             console.log("agent: ", agent.handleRequest(intentMap));
 
             // *sigh* //
             let agentRespone = agent.handleRequest(intentMap);
             console.log("agentRespone", agentRespone);
-            resolve(agentRespone);
+            //resolve(agentRespone);
             // *sigh end*
 
             //reject({ "test": true});
 
-
+            /*
             // http requests
             function makeHttpsRequest() {
                 Request('https://kanjialive-api.p.rapidapi.com/api/public/search/advanced/?on=%E3%82%B7', { "X-RapidAPI-Key": process.env.rapidapi_key }, (err, res, body) => {
@@ -88,9 +91,10 @@ module.exports = {
                     console.log(body.explanation);
                 });
             };
+            */
 
 
-        });
+        //});
 
     }
 };
