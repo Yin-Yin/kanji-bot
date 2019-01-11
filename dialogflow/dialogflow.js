@@ -39,7 +39,14 @@ module.exports = {
             optionsKanjialiveRapidapi.path = '/api/public/kanji/' + encodeURIComponent(request.body.queryResult.parameters.kanji_single);
             console.log("optionsKanjialiveRapidapi", optionsKanjialiveRapidapi);
             makeHttpsRequest(optionsKanjialiveRapidapi).then(
-                resData => {console.log("resData", resData)}
+                resData => {
+                    console.log("resData", resData)
+                    agent.add("Kanji", resData.kanji.character);
+                    agent.add("meaning", resData.kanji.meaning);
+                    agent.add("onyomi", resData.kanji.onyomi);
+                    agent.add("kunyomi", resData.kanji.kunyomi);
+                    agent.add("examples", resData.kanji.examples);
+                }
                 );
             agent.add(`Your Kanji is ` + request.body.queryResult.parameters.kanji_single);
         }
