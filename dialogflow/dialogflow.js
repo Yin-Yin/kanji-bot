@@ -26,10 +26,9 @@ module.exports = {
 
         function kanjiExplain(agent) {
             let kanji = encodeURIComponent(request.body.queryResult.parameters.kanji);
-            let hostname = 'kanjialive-api.p.rapidapi.com';
-            let requestPath = '/api/public/kanji/' + kanji;
-            console.log("requestPath", requestPath);
-            makeHttpsRequest(hostname, requestPath);
+            optionsKanjialiveRapidapi.path = '/api/public/kanji/' + kanji;
+            console.log("optionsKanjialiveRapidapi", optionsKanjialiveRapidapi);
+            makeHttpsRequest(optionsKanjialiveRapidapi);
             agent.add(`Your Kanji is ` + request.body.queryResult.parameters.kanji);
         }
 
@@ -71,23 +70,30 @@ module.exports = {
         agent.handleRequest(intentMap);
 
 
+        /* idea: have different options for different apis
+                problem: the path is changing
+        */
+        const optionsKanjialiveRapidapi = {
+            hostname: 'kanjialive-api.p.rapidapi.com',
+            path: '',
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-RapidAPI-Key': process.env.rapidapi_key
+            }
+        };
+
+
         // http requests
-        function makeHttpsRequest(hostname, path) {
-            const options = {
-                hostname: hostname,
-                path: path,
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-RapidAPI-Key': process.env.rapidapi_key
-                }
-            };
+        function makeHttpsRequest(options) {
+            // toDo: what does  process.stdout do?
+            // toDo: make as promise
             const req = https.request(options, (res) => {
                 console.log(`statusCode: ${res.statusCode}`)
 
                 res.on('data', (d) => {
                     process.stdout.write(d);
-                    console.log('data: ' , d);
+                    console.log('data: ', d);
                 })
             })
 
