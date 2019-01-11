@@ -25,8 +25,9 @@ module.exports = {
         }
 
         function kanjiExplain(agent) {
+            let kanji = request.body.queryResult.parameters.kanji;
             let hostname = 'kanjialive-api.p.rapidapi.com';
-            let requestPath = '/api/public/kanji/' + request.body.queryResult.parameters.kanji;
+            let requestPath = '/api/public/kanji/' + kanji.trim();
             console.log("requestPath", requestPath);
             makeHttpsRequest(hostname, requestPath);
             agent.add(`Your Kanji is ` + request.body.queryResult.parameters.kanji);
