@@ -48,9 +48,9 @@ module.exports = {
                         agent.add("kunyomi", resData.kanji.kunyomi);
                         agent.add("examples", resData.kanji.examples);
                         //agent.handleRequest(intentMap);
+                        resolve(); // this is for the workaround
                     }
                 );
-                resolve(); // this is for the workaround
             });
             //agent.add(`Your Kanji is ` + request.body.queryResult.parameters.kanji_single);
         }
