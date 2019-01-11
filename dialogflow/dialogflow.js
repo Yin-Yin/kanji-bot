@@ -87,7 +87,7 @@ module.exports = {
         intentMap.set('kanji.explain', kanjiExplain);
         // intentMap.set('your intent name here', yourFunctionHandler);
         // intentMap.set('your intent name here', googleAssistantHandler);
-        agent.handleRequest(intentMap);
+        //agent.handleRequest(intentMap);
 
 
         function makeHttpsRequest(options) {
