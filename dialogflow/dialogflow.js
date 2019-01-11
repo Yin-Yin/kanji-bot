@@ -5,7 +5,6 @@
 const { WebhookClient } = require('dialogflow-fulfillment');
 const { Card, Suggestion } = require('dialogflow-fulfillment');
 const https = require('https');
-// const { Request } = require('request');
 
 module.exports = {
     handleRequest: (request, response) => {
@@ -26,7 +25,9 @@ module.exports = {
         }
 
         function kanjiExplain(agent) {
-            makeHttpsRequest();
+            let hostname = 'kanjialive-api.p.rapidapi.com';
+            let requestPath = '/api/public/search/advanced/?on=' + request.body.queryResult.parameters.kanji;
+            makeHttpsRequest(hostname, requestPath);
             agent.add(`Your Kanji is ` + request.body.queryResult.parameters.kanji);
         }
 
@@ -66,30 +67,13 @@ module.exports = {
         // intentMap.set('your intent name here', yourFunctionHandler);
         // intentMap.set('your intent name here', googleAssistantHandler);
         agent.handleRequest(intentMap);
-        // toDo: we need to figure out, how the agent works. Currently we get an rejected promise error. We need to resolve the promise and reject it in case of an error
-        //  - How can we utilize the agent?
-        //  - what does the handleRequest function from the agent do?
-        //  - Where do we reject/resolve the promise?
-        //  - original line is :  exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response) => {
-        //  - from the firebase docs_: https://firebase.google.com/docs/functions/http-events
-        //  - explaining express: https://stackoverflow.com/questions/7042340/error-cant-set-headers-after-they-are-sent-to-the-client 
-        //console.log("agent: ", agent.handleRequest(intentMap));
-
-        // *sigh* //
-        //let agentRespone = agent.handleRequest(intentMap);
-        //console.log("agentRespone", agentRespone);
-        //resolve(agentRespone);
-        // *sigh end*
-
-        //reject({ "test": true});
 
 
         // http requests
-        function makeHttpsRequest() {
-
+        function makeHttpsRequest(hostname, path) {
             const options = {
-                hostname: 'kanjialive-api.p.rapidapi.com',
-                path: '/api/public/search/advanced/?on=%E3%82%B7',
+                hostname: hostname,
+                path: path,
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -110,37 +94,7 @@ module.exports = {
             })
 
             req.end();
-
-
-            /*
-            const options = {
-                url: 'https://kanjialive-api.p.rapidapi.com/api/public/search/advanced/?on=%E3%82%B7',
-                headers: {
-                    'X-RapidAPI-Key': process.env.rapidapi_key
-                }
-            };
-
-            function callback(error, response, body) {
-                if (!error && response.statusCode == 200) {
-                    const info = JSON.parse(body);
-                    console.log(info);
-                }
-            }
-            Request(options, callback);
-            */
-
-            /*
-            Request('https://kanjialive-api.p.rapidapi.com/api/public/search/advanced/?on=%E3%82%B7', { "X-RapidAPI-Key": process.env.rapidapi_key }, (err, res, body) => {
-                if (err) { return console.log(err); }
-                console.log(body.url);
-                console.log(body.explanation);
-            });
-            */
         };
-
-
-
-        //});
 
     }
 };

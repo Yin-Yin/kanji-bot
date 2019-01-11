@@ -5,8 +5,7 @@ var express = require('express');
 var app = express();
 var dialogflowModule = require('./dialogflow/dialogflow.js');
 
-console.log("starting server ..");
-//firestoreModule.initializeDatabase();
+console.log("starting server ...");
 
 // parse application/x-www-form-urlencoded 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -19,12 +18,6 @@ app.use(express.static(__dirname + '/public'));
 app.post('/', function(req, res) {
   console.log("app post /");
   dialogflowModule.handleRequest(req, res);
-  /*
-  .then((responseJSON) => {
-    res.send(responseJSON);
-    console.log("responding with ", responseJSON);
-  });
-  */
 })
 
 app.get('/', function(req, res) {
