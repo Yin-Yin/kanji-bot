@@ -92,7 +92,7 @@ module.exports = {
                     res.on('data', (resData) => {
                         //process.stdout.write(d);
                         console.log('data: ', resData);
-                        resolve(JSON.stringify(resData));
+                        resolve(JSON.parse(resData));
                     })
                 })
 
