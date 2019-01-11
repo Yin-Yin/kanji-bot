@@ -72,11 +72,11 @@ module.exports = {
             //  - original line is :  exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response) => {
             //  - from the firebase docs_: https://firebase.google.com/docs/functions/http-events
             //  - explaining express: https://stackoverflow.com/questions/7042340/error-cant-set-headers-after-they-are-sent-to-the-client 
-            console.log("agent: ", agent.handleRequest(intentMap));
+            //console.log("agent: ", agent.handleRequest(intentMap));
 
             // *sigh* //
-            let agentRespone = agent.handleRequest(intentMap);
-            console.log("agentRespone", agentRespone);
+            //let agentRespone = agent.handleRequest(intentMap);
+            //console.log("agentRespone", agentRespone);
             //resolve(agentRespone);
             // *sigh end*
 
