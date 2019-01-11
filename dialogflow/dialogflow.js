@@ -46,6 +46,7 @@ module.exports = {
                     agent.add("onyomi", resData.kanji.onyomi);
                     agent.add("kunyomi", resData.kanji.kunyomi);
                     agent.add("examples", resData.kanji.examples);
+                    agent.handleRequest(intentMap);
                 }
                 );
             agent.add(`Your Kanji is ` + request.body.queryResult.parameters.kanji_single);
