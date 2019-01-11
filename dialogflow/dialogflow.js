@@ -46,7 +46,7 @@ module.exports = {
                         agent.add("Meaning: " + resData.kanji.meaning.english);
                         agent.add("Onyomi: " + resData.kanji.onyomi.romaji + " / " + resData.kanji.onyomi.katakana);
                         agent.add("Kunyomi: " + resData.kanji.kunyomi.romaji + " / " + resData.kanji.kunyomi.katakana);
-                        agent.add("Examples" + resData.kanji.example[0].japanese);
+                        agent.add("Example: " + resData.kanji.examples[0].japanese);
                         resolve();
                     }
                 );
