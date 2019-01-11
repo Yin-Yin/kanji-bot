@@ -47,7 +47,7 @@ module.exports = {
                         agent.add("Radical: " + resData.radical.character);
                         agent.add("Onyomi: " + resData.kanji.onyomi.katakana + " (" + resData.kanji.onyomi.romaji + ")");
                         agent.add("Kunyomi: " + resData.kanji.kunyomi.hiragana  + " (" + resData.kanji.kunyomi.romaji + ")");
-                        agent.add("Example:" + resData.kanji.examples[0].japanese);
+                        agent.add("Example:" + resData.examples[0].japanese);
                         resolve();
                     }
                 );
