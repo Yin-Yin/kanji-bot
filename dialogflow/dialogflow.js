@@ -38,7 +38,9 @@ module.exports = {
         function kanjiExplain(agent) {
             optionsKanjialiveRapidapi.path = '/api/public/kanji/' + encodeURIComponent(request.body.queryResult.parameters.kanji_single);
             console.log("optionsKanjialiveRapidapi", optionsKanjialiveRapidapi);
-            makeHttpsRequest(optionsKanjialiveRapidapi);
+            makeHttpsRequest(optionsKanjialiveRapidapi).then(
+                resData => {console.log("resData", resData)}
+                );
             agent.add(`Your Kanji is ` + request.body.queryResult.parameters.kanji_single);
         }
 
@@ -83,20 +85,25 @@ module.exports = {
         function makeHttpsRequest(options) {
             // toDo: what does  process.stdout do?
             // toDo: make as promise
-            const req = https.request(options, (res) => {
-                console.log(`statusCode: ${res.statusCode}`)
+            return new Promise (function(resolve, reject) {
+                const req = https.request(options, (res) => {
+                    console.log(`statusCode: ${res.statusCode}`)
 
-                res.on('data', (d) => {
-                    //process.stdout.write(d);
-                    console.log('data: ', d);
+                    res.on('data', (resData) => {
+                        //process.stdout.write(d);
+                        console.log('data: ', resData);
+                        resolve(resData);
+                    })
                 })
-            })
 
-            req.on('error', (error) => {
-                console.error(error)
-            })
+                req.on('error', (error) => {
+                    console.error(error);
+                    reject(error);
+                })
 
-            req.end();
+                req.end();
+
+            });
         };
 
     }
