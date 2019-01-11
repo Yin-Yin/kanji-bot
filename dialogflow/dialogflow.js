@@ -41,13 +41,14 @@ module.exports = {
                 console.log("optionsKanjialiveRapidapi", optionsKanjialiveRapidapi);
                 makeHttpsRequest(optionsKanjialiveRapidapi).then(
                     resData => {
-                        console.log("resData", resData)
+                        console.log("resData", resData);
+                        
+                        console.log("resData.kanji.character", resData.kanji.character);
                         agent.add("Kanji", resData.kanji.character);
                         agent.add("meaning", resData.kanji.meaning);
                         agent.add("onyomi", resData.kanji.onyomi);
                         agent.add("kunyomi", resData.kanji.kunyomi);
                         agent.add("examples", resData.kanji.examples);
-                        //agent.handleRequest(intentMap);
                         resolve(); // this is for the workaround
                     }
                 );
