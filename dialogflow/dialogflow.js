@@ -6,9 +6,6 @@ const { WebhookClient } = require('dialogflow-fulfillment');
 const { Card, Suggestion } = require('dialogflow-fulfillment');
 const https = require('https');
 
-/* idea: have different options for different apis
-        problem: the path is changing
-*/
 const optionsKanjialiveRapidapi = {
     hostname: 'kanjialive-api.p.rapidapi.com',
     path: '',
@@ -39,8 +36,7 @@ module.exports = {
         }
 
         function kanjiExplain(agent) {
-            let kanji = encodeURIComponent(request.body.queryResult.parameters.kanji);
-            optionsKanjialiveRapidapi.path = '/api/public/kanji/' + kanji;
+            optionsKanjialiveRapidapi.path = '/api/public/kanji/' + encodeURIComponent(request.body.queryResult.parameters.kanji_single);
             console.log("optionsKanjialiveRapidapi", optionsKanjialiveRapidapi);
             makeHttpsRequest(optionsKanjialiveRapidapi);
             agent.add(`Your Kanji is ` + request.body.queryResult.parameters.kanji);
@@ -84,7 +80,6 @@ module.exports = {
         agent.handleRequest(intentMap);
 
 
-        // http requests
         function makeHttpsRequest(options) {
             // toDo: what does  process.stdout do?
             // toDo: make as promise
