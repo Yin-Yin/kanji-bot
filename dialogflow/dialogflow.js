@@ -42,11 +42,11 @@ module.exports = {
                     resData => {
                         console.log("resData", resData);
                         console.log("resData.kanji.character", resData.kanji.character);
-                        agent.add("Kanji" + resData.kanji.character);
-                        agent.add("meaning" + resData.kanji.meaning);
-                        agent.add("onyomi" + resData.kanji.onyomi);
-                        agent.add("kunyomi" + resData.kanji.kunyomi);
-                        agent.add("examples" + resData.kanji.examples);
+                        agent.add("Kanji: " + resData.kanji.character);
+                        agent.add("Meaning: " + resData.kanji.meaning.english);
+                        agent.add("Onyomi: " + resData.kanji.onyomi.romaji + " / " + resData.kanji.onyomi.katakana);
+                        agent.add("Kunyomi: " + resData.kanji.kunyomi.romaji + " / " + resData.kanji.kunyomi.katakana);
+                        agent.add("Examples" + resData.kanji.example[0].japanese);
                         resolve();
                     }
                 );
