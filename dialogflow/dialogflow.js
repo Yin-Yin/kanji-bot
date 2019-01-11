@@ -6,6 +6,20 @@ const { WebhookClient } = require('dialogflow-fulfillment');
 const { Card, Suggestion } = require('dialogflow-fulfillment');
 const https = require('https');
 
+/* idea: have different options for different apis
+        problem: the path is changing
+*/
+const optionsKanjialiveRapidapi = {
+    hostname: 'kanjialive-api.p.rapidapi.com',
+    path: '',
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+        'X-RapidAPI-Key': process.env.rapidapi_key
+    }
+};
+
+
 module.exports = {
     handleRequest: (request, response) => {
         console.log("handleRequest invoked");
@@ -68,20 +82,6 @@ module.exports = {
         // intentMap.set('your intent name here', yourFunctionHandler);
         // intentMap.set('your intent name here', googleAssistantHandler);
         agent.handleRequest(intentMap);
-
-
-        /* idea: have different options for different apis
-                problem: the path is changing
-        */
-        const optionsKanjialiveRapidapi = {
-            hostname: 'kanjialive-api.p.rapidapi.com',
-            path: '',
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-RapidAPI-Key': process.env.rapidapi_key
-            }
-        };
 
 
         // http requests
