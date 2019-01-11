@@ -46,10 +46,10 @@ module.exports = {
                     agent.add("onyomi", resData.kanji.onyomi);
                     agent.add("kunyomi", resData.kanji.kunyomi);
                     agent.add("examples", resData.kanji.examples);
-                    agent.handleRequest(intentMap);
+                    //agent.handleRequest(intentMap);
                 }
                 );
-            agent.add(`Your Kanji is ` + request.body.queryResult.parameters.kanji_single);
+            //agent.add(`Your Kanji is ` + request.body.queryResult.parameters.kanji_single);
         }
 
         // Uncomment and edit to make your own intent handler
@@ -87,7 +87,7 @@ module.exports = {
         intentMap.set('kanji.explain', kanjiExplain);
         // intentMap.set('your intent name here', yourFunctionHandler);
         // intentMap.set('your intent name here', googleAssistantHandler);
-        //agent.handleRequest(intentMap);
+        agent.handleRequest(intentMap);
 
 
         function makeHttpsRequest(options) {
