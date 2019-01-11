@@ -36,19 +36,22 @@ module.exports = {
         }
 
         function kanjiExplain(agent) {
-            optionsKanjialiveRapidapi.path = '/api/public/kanji/' + encodeURIComponent(request.body.queryResult.parameters.kanji_single);
-            console.log("optionsKanjialiveRapidapi", optionsKanjialiveRapidapi);
-            makeHttpsRequest(optionsKanjialiveRapidapi).then(
-                resData => {
-                    console.log("resData", resData)
-                    agent.add("Kanji", resData.kanji.character);
-                    agent.add("meaning", resData.kanji.meaning);
-                    agent.add("onyomi", resData.kanji.onyomi);
-                    agent.add("kunyomi", resData.kanji.kunyomi);
-                    agent.add("examples", resData.kanji.examples);
-                    agent.handleRequest(intentMap);
-                }
+            return new Promise((resolve, reject) => { // this is the workaround
+                optionsKanjialiveRapidapi.path = '/api/public/kanji/' + encodeURIComponent(request.body.queryResult.parameters.kanji_single);
+                console.log("optionsKanjialiveRapidapi", optionsKanjialiveRapidapi);
+                makeHttpsRequest(optionsKanjialiveRapidapi).then(
+                    resData => {
+                        console.log("resData", resData)
+                        agent.add("Kanji", resData.kanji.character);
+                        agent.add("meaning", resData.kanji.meaning);
+                        agent.add("onyomi", resData.kanji.onyomi);
+                        agent.add("kunyomi", resData.kanji.kunyomi);
+                        agent.add("examples", resData.kanji.examples);
+                        //agent.handleRequest(intentMap);
+                    }
                 );
+                resolve(); // this is for the workaround
+            });
             //agent.add(`Your Kanji is ` + request.body.queryResult.parameters.kanji_single);
         }
 
@@ -93,7 +96,7 @@ module.exports = {
         function makeHttpsRequest(options) {
             // toDo: what does  process.stdout do?
             // toDo: make as promise
-            return new Promise (function(resolve, reject) {
+            return new Promise(function(resolve, reject) {
                 const req = https.request(options, (res) => {
                     console.log(`statusCode: ${res.statusCode}`)
 
