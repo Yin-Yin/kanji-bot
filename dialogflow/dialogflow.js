@@ -4,7 +4,8 @@
 
 const { WebhookClient } = require('dialogflow-fulfillment');
 const { Card, Suggestion } = require('dialogflow-fulfillment');
-const { Request } = require('request');
+const https = require('https');
+// const { Request } = require('request');
 
 module.exports = {
     handleRequest: (request, response) => {
@@ -85,6 +86,33 @@ module.exports = {
 
         // http requests
         function makeHttpsRequest() {
+
+            const options = {
+                hostname: 'kanjialive-api.p.rapidapi.com',
+                path: '/api/public/search/advanced/?on=%E3%82%B7',
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-RapidAPI-Key': process.env.rapidapi_key
+                }
+            };
+            const req = https.request(options, (res) => {
+                console.log(`statusCode: ${res.statusCode}`)
+
+                res.on('data', (d) => {
+                    process.stdout.write(d);
+                    console.log('data: ' , d);
+                })
+            })
+
+            req.on('error', (error) => {
+                console.error(error)
+            })
+
+            req.end();
+
+
+            /*
             const options = {
                 url: 'https://kanjialive-api.p.rapidapi.com/api/public/search/advanced/?on=%E3%82%B7',
                 headers: {
@@ -98,8 +126,9 @@ module.exports = {
                     console.log(info);
                 }
             }
-
             Request(options, callback);
+            */
+
             /*
             Request('https://kanjialive-api.p.rapidapi.com/api/public/search/advanced/?on=%E3%82%B7', { "X-RapidAPI-Key": process.env.rapidapi_key }, (err, res, body) => {
                 if (err) { return console.log(err); }
