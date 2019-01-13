@@ -4,8 +4,8 @@
 
 const { WebhookClient } = require('dialogflow-fulfillment');
 const { Card, Suggestion } = require('dialogflow-fulfillment');
-const https = require('https');
 const kanjiModule = require('../kanji_module/kanji_module.js');
+const utilsModule = require('../utils_module/utils_module.js');
 
 const optionsKanjialiveRapidapi = {
     hostname: 'kanjialive-api.p.rapidapi.com',
@@ -39,7 +39,7 @@ module.exports = {
         function kanjiExplain(agent) {
             return new Promise((resolve, reject) => {
                 optionsKanjialiveRapidapi.path = '/api/public/kanji/' + encodeURIComponent(request.body.queryResult.parameters.kanji_single);
-                makeHttpsRequest(optionsKanjialiveRapidapi).then(
+                utilsModule.makeHttpsRequest(optionsKanjialiveRapidapi).then(
                     resData => {
                         console.log("resData", resData);
                         console.log("resData.kanji.character", resData.examples[0].meaning);
@@ -92,28 +92,6 @@ module.exports = {
         // intentMap.set('your intent name here', googleAssistantHandler);
         agent.handleRequest(intentMap);
 
-        // toDo: put this function below
-        function makeHttpsRequest(options) {
-            return new Promise(function(resolve, reject) {
-                
-                const req = https.request(options, (res) => {
-                    console.log(`statusCode: ${res.statusCode}`)
-                    
-                    res.on('data', (resData) => {
-                        resolve(JSON.parse(resData));
-                    })
-                })
-
-                req.on('error', (error) => {
-                    console.error(error);
-                    reject(error);
-                })
-
-                req.end();
-                
-
-            });
-        };
 
     }
 };
