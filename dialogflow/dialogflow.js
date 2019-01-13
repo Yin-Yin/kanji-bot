@@ -38,6 +38,7 @@ module.exports = {
 
         function kanjiExplain(agent) {
             return new Promise((resolve, reject) => {
+                console.log("get kanji data from map: ", kanjiModule.getKanjiData(request.body.queryResult.parameters.kanji_single));
                 optionsKanjialiveRapidapi.path = '/api/public/kanji/' + encodeURIComponent(request.body.queryResult.parameters.kanji_single);
                 utilsModule.makeHttpsRequest(optionsKanjialiveRapidapi).then(
                     resData => {

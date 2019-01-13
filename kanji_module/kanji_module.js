@@ -29,5 +29,9 @@ module.exports = {
                         }
                     }
                 );
+    },
+    
+    getKanjiData: (kanji) => {
+        return kanjiMap.get(kanji);
     }
 };
