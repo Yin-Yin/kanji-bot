@@ -131,11 +131,10 @@ module.exports = {
             let solutionKanji = randomKanjis[Math.floor(Math.random() * randomKanjis.length)];
             agent.add('Choose the correct meaning of the kanji: ' + solutionKanji.kanji.character);
             // let qustionNumbers = [1, 2, 3, 4];
-            let j = 4;
-            while (j > 0) {
+            let j = 3;
+            while (j >= 0) {
                 console.log(j);
-                let k = j -1;
-                agent.add(new Suggestion(randomKanjis[k].kanji.character + ` means ` + randomKanjis[k].kanji.meaning.english));
+                agent.add(new Suggestion(randomKanjis[j].kanji.character + ` means ` + randomKanjis[j].kanji.meaning.english));
                 // console.log(Math.floor(Math.random()*4))
                 //let randomQuestionNumber = qustionNumbers.splice(Math.floor(Math.random() * qustionNumbers.length), 1);
                 //console.log("randomQuestionNumber", randomQuestionNumber);
