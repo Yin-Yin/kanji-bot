@@ -77,8 +77,8 @@ module.exports = {
         }
 
         function randomKanji(agent) {
-            let randomKanji = kanjiModule.getRandomKanjiData();
-            let kanjiData = kanjiModule.getKanjiData(randomKanji);
+            let kanjiData = kanjiModule.getRandomKanjiData();
+            // let kanjiData = kanjiModule.getKanjiData(randomKanji);
             console.log("kanjiData", kanjiData);
             agent.add("Kanji: " + kanjiData.kanji.character);
             agent.add("Meaning: " + kanjiData.kanji.meaning.english);
@@ -122,6 +122,13 @@ module.exports = {
                 buttonUrl: 'https://assistant.google.com/'
             }));*/
             agent.add('Choose the correct meaning of the kanji: ' + randomKanji1.kanji.character);
+            let i = 4;
+            let usedAlready = [];
+            while (i >= 0)  {
+                console.log(i);
+                
+                i--;
+            }
             agent.add(new Suggestion(randomKanji1.kanji.character + ` means ` + randomKanji1.kanji.meaning.english));
             agent.add(new Suggestion(randomKanji1.kanji.character + ` means ` + randomKanji2.kanji.meaning.english));
             agent.add(new Suggestion(randomKanji1.kanji.character + ` means ` + randomKanji3.kanji.meaning.english));
