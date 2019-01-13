@@ -46,7 +46,7 @@ module.exports = {
             agent.add("Kunyomi: " + kanjiData.kanji.kunyomi.hiragana + " (" + kanjiData.kanji.kunyomi.romaji + ")");
             agent.add("Example:" + kanjiData.examples[0].japanese);
             agent.add(new Suggestion(`Radical ` + kanjiData.radical.character));
-            agent.add(new Suggestion(`Examples ` + kanjiData.radical.character));
+            agent.add(new Suggestion(`Examples ` + kanjiData.kanji.character));
         }
 
         function kanjiExamples(agent) {
