@@ -78,7 +78,7 @@ module.exports = {
 
         function randomKanji(agent) {
             let randomKanji = kanjiModule.getRandomKanjiData();
-            let kanjiData = kanjiModule.getKanjiData(request.body.queryResult.parameters.kanji_single);
+            let kanjiData = kanjiModule.getKanjiData(randomKanji);
             console.log("kanjiData", kanjiData);
             agent.add("Kanji: " + kanjiData.kanji.character);
             agent.add("Meaning: " + kanjiData.kanji.meaning.english);
