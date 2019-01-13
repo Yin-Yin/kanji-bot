@@ -61,7 +61,7 @@ module.exports = {
                 agent.add(kanjiData.examples[index].audio.mp3);
                 //agent.add(kanjiData.examples[index].audio.mp3);
                 agent.add(new Card({
-                    //title: `Title: this is a card title`,
+                    title: `Listen to example`,
                     imageUrl: kanjiData.kanji.video.poster,
                     //text: `This is the body text of a card.  You can even use line\n  breaks and emoji! 💁`,
                     buttonText: 'listen to example',
