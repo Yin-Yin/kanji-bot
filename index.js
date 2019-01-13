@@ -44,11 +44,6 @@ app.post('/', function(req, res) {
   dialogflowModule.handleRequest(req, res);
 })
 
-app.get('/', function(req, res) {
-  console.log("app get /");
-  res.send('Hullo!\n <a href="https://github.com/Yin-Yin/kanji-bot">Kanji Ro-Bot</a>');
-});
-
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });

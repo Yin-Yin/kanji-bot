@@ -4,7 +4,7 @@
 
 const { WebhookClient } = require('dialogflow-fulfillment');
 const { Card, Suggestion } = require('dialogflow-fulfillment');
-const https = require('https');
+const { Https } = require('https');
 
 const optionsKanjialiveRapidapi = {
     hostname: 'kanjialive-api.p.rapidapi.com',
@@ -96,7 +96,7 @@ module.exports = {
         function makeHttpsRequest(options) {
             return new Promise(function(resolve, reject) {
                 
-                const req = https.request(options, (res) => {
+                const req = Https.request(options, (res) => {
                     console.log(`statusCode: ${res.statusCode}`)
                     
                     res.on('data', (resData) => {
