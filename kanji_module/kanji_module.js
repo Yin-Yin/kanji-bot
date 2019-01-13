@@ -16,6 +16,7 @@ const optionsKanjialiveRapidapi = {
 module.exports = {
     
     initKanjiData: () => {
+        optionsKanjialiveRapidapi.path = '/api/public/kanji/all'
         utilsModule.makeHttpsRequest(optionsKanjialiveRapidapi).then(
                     resData => {
                         console.log("resData", resData);
