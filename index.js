@@ -32,7 +32,7 @@ app.use((req, res, next) => {
 
 })
 
-// kanjiModule.initKanjiData(); // initialize kanji data (load all Kanjis in memory from API)
+kanjiModule.initKanjiData(); // initialize kanji data (load all Kanjis in memory from API)
 
 // parse application/x-www-form-urlencoded 
 app.use(bodyParser.urlencoded({ extended: false }));

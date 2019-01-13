@@ -21,14 +21,11 @@ module.exports = {
         utilsModule.makeHttpsRequest(optionsKanjialiveRapidapi).then(
                     resData => {
                         console.log("resData", resData);
-                        // console.log("resData.kanji.character", resData.examples[0].meaning);
-                        /*
                         for (let kanji in resData) {
                             console.log("kanji", kanji);
                             console.log("resData[kanji]", resData[kanji]);
                             //kanjiMap.set()
                         }
-                        */
                     }
                 );
     }

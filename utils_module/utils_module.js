@@ -16,18 +16,10 @@ module.exports = {
                     data += chunk;
                 });
 
-                // The whole response has been received. Print out the result.
+                // The whole response has been received.
                 res.on('end', () => {
-                    console.log(JSON.parse(data));
                     resolve(JSON.parse(data));
                 });
-                
-                /*
-                res.on('data', (resData) => {
-                    console.log("resData", resData);
-                    resolve(JSON.parse(resData));
-                })
-                */
             })
 
             req.on('error', (error) => {
