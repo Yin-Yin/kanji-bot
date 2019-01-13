@@ -39,11 +39,20 @@ module.exports = {
         function kanjiExplain(agent) {
             let kanjiData = kanjiModule.getKanjiData(request.body.queryResult.parameters.kanji_single);
             console.log("kanjiData", kanjiData);
-            agent.add("Kanji: " + kanjiData.kanji.character);
-            agent.add("Meaning: " + kanjiData.kanji.meaning.english);
-            agent.add("Radical: " + kanjiData.radical.character);
-            agent.add("Onyomi: " + kanjiData.kanji.onyomi.katakana + " (" + kanjiData.kanji.onyomi.romaji + ")");
-            agent.add("Kunyomi: " + kanjiData.kanji.kunyomi.hiragana + " (" + kanjiData.kanji.kunyomi.romaji + ")");
+            agent.add(new Card({
+                title: "Kanji: " + kanjiData.kanji.character,
+                imageUrl: kanjiData.kanji.video.poster,
+                text: "Meaning: " + kanjiData.kanji.meaning.english + "\n Radical: " + kanjiData.radical.character + "\n Onyomi: " + kanjiData.kanji.onyomi.katakana + " (" + kanjiData.kanji.onyomi.romaji + ") \n Kunyomi: " + kanjiData.kanji.kunyomi.hiragana + " (" + kanjiData.kanji.kunyomi.romaji + ")",
+                //buttonText: 'Listen to example',
+                //buttonUrl: kanjiData.examples[index].audio.mp3
+            }));
+            /*
+        agent.add("Kanji: " + kanjiData.kanji.character);
+        agent.add("Meaning: " + kanjiData.kanji.meaning.english);
+        agent.add("Radical: " + kanjiData.radical.character);
+        agent.add("Onyomi: " + kanjiData.kanji.onyomi.katakana + " (" + kanjiData.kanji.onyomi.romaji + ")");
+        agent.add("Kunyomi: " + kanjiData.kanji.kunyomi.hiragana + " (" + kanjiData.kanji.kunyomi.romaji + ")");
+        */
             agent.add("Example:" + kanjiData.examples[0].japanese);
             agent.add(new Suggestion(`Radical ` + kanjiData.radical.character));
             agent.add(new Suggestion(`Examples ` + kanjiData.kanji.character));
@@ -54,17 +63,17 @@ module.exports = {
             console.log("kanjiData", kanjiData);
             agent.add("Kanji: " + kanjiData.kanji.character);
             for (let index in kanjiData.examples) {
-                agent.add(kanjiData.examples[index].japanese);
+                //agent.add(kanjiData.examples[index].japanese);
                 //console.log("meaning", kanjiData.examples[index].meaning);
                 //console.log("audio", kanjiData.examples[index].audio);
-                agent.add(kanjiData.examples[index].meaning.english);
+                //agent.add(kanjiData.examples[index].meaning.english);
                 // agent.add(kanjiData.examples[index].audio.mp3);
                 //agent.add(kanjiData.examples[index].audio.mp3);
                 agent.add(new Card({
-                    title: `Listen to example`,
-                    //imageUrl: kanjiData.kanji.video.poster,
-                    //text: `This is the body text of a card.  You can even use line\n  breaks and emoji! 💁`,
-                    buttonText: kanjiData.examples[index].japanese,
+                    title: kanjiData.examples[index].japanese,
+                    imageUrl: kanjiData.kanji.video.poster,
+                    text: kanjiData.examples[index].meaning.english,
+                    buttonText: 'Listen to example',
                     buttonUrl: kanjiData.examples[index].audio.mp3
                 }));
             }
@@ -80,12 +89,7 @@ module.exports = {
             let kanjiData = kanjiModule.getRandomKanjiData();
             // let kanjiData = kanjiModule.getKanjiData(randomKanji);
             console.log("kanjiData", kanjiData);
-            agent.add("Kanji: " + kanjiData.kanji.character);
-            agent.add("Meaning: " + kanjiData.kanji.meaning.english);
-            agent.add("Radical: " + kanjiData.radical.character);
-            agent.add("Onyomi: " + kanjiData.kanji.onyomi.katakana + " (" + kanjiData.kanji.onyomi.romaji + ")");
-            agent.add("Kunyomi: " + kanjiData.kanji.kunyomi.hiragana + " (" + kanjiData.kanji.kunyomi.romaji + ")");
-            agent.add("Example:" + kanjiData.examples[0].japanese);
+            agent.add("Kanji: " + kanjiData.kanji.character + "\n Meaning: " + kanjiData.kanji.meaning.english + "\n Radical: " + kanjiData.radical.character + "\n Onyomi: " + kanjiData.kanji.onyomi.katakana + " (" + kanjiData.kanji.onyomi.romaji + ") \n Kunyomi: " + kanjiData.kanji.kunyomi.hiragana + " (" + kanjiData.kanji.kunyomi.romaji + ")");
             agent.add(new Suggestion(`Radical ` + kanjiData.radical.character));
         }
 
@@ -148,14 +152,15 @@ module.exports = {
             agent.add(new Suggestion(randomKanji1.kanji.character + ` means ` + randomKanji4.kanji.meaning.english));
             */
         }
-        
+
         function quizCheckTest(agent) {
             let kanjiData = kanjiModule.getKanjiData(request.body.queryResult.parameters.kanji_single);
             //console.log(request.body.queryResult.parameters.kanji_single);
             if (kanjiData.kanji.meaning.english.includes(request.body.queryResult.parameters.any)) {
-                agent.add("✔️ \n Correct! " + kanjiData.kanji.character + " means " + kanjiData.kanji.meaning.english);
-            } else {
-                agent.add("❌ \n No. Actually " + kanjiData.kanji.character + " means " + kanjiData.kanji.meaning.english);
+                agent.add("✔️ Correct! " + kanjiData.kanji.character + " means " + kanjiData.kanji.meaning.english);
+            }
+            else {
+                agent.add("❌ No. Actually " + kanjiData.kanji.character + " means " + kanjiData.kanji.meaning.english);
             }
             //console.log(request.body.queryResult.parameters.any);
         }
@@ -176,7 +181,7 @@ module.exports = {
             agent.add(new Suggestion(`Suggestion`));
             agent.setContext({ name: 'weather', lifespan: 2, parameters: { city: 'Rome' } });
         }
-        
+
 
 
         // // Uncomment and edit to make your own Google Assistant intent handler
@@ -199,11 +204,6 @@ module.exports = {
         intentMap.set('kanji.examples', kanjiExamples);
         intentMap.set('quiz.start', quizTest);
         intentMap.set('quiz.checkTest', quizCheckTest);
-
-        // intentMap.set('your intent name here', yourFunctionHandler);
-        // intentMap.set('your intent name here', googleAssistantHandler);
         agent.handleRequest(intentMap);
-
-
     }
 };
