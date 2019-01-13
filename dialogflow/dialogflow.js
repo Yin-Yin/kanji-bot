@@ -64,7 +64,7 @@ module.exports = {
                     title: `Listen to example`,
                     //imageUrl: kanjiData.kanji.video.poster,
                     //text: `This is the body text of a card.  You can even use line\n  breaks and emoji! 💁`,
-                    buttonText:  kanjiData.examples[index].japanese,
+                    buttonText: kanjiData.examples[index].japanese,
                     buttonUrl: kanjiData.examples[index].audio.mp3
                 }));
             }
@@ -108,6 +108,25 @@ module.exports = {
             });
         }
         */
+        
+        function quizTest(agent) {
+            let randomKanji1 = kanjiModule.getRandomKanjiData();
+            let randomKanji2 = kanjiModule.getRandomKanjiData();
+            let randomKanji3 = kanjiModule.getRandomKanjiData();
+            let randomKanji4 = kanjiModule.getRandomKanjiData();
+            /*agent.add(new Card({
+                title: `Choose the correct meaning of the kanji: ` + randomKanji1.kanji.character,
+                imageUrl: 'https://developers.google.com/actions/images/badges/XPM_BADGING_GoogleAssistant_VER.png',
+                text: `This is the body text of a card.  You can even use line\n  breaks and emoji! 💁`,
+                buttonText: 'This is a button',
+                buttonUrl: 'https://assistant.google.com/'
+            }));*/
+            agent.add('Choose the correct meaning of the kanji: ' + randomKanji1.kanji.character);
+            agent.add(new Suggestion(randomKanji1.kanji.character + ` means ` + randomKanji1.kanji.meaning.english));
+            agent.add(new Suggestion(randomKanji1.kanji.character + ` means ` + randomKanji2.kanji.meaning.english));
+            agent.add(new Suggestion(randomKanji1.kanji.character + ` means ` + randomKanji3.kanji.meaning.english));
+            agent.add(new Suggestion(randomKanji1.kanji.character + ` means ` + randomKanji4.kanji.meaning.english));
+        }
 
         // Uncomment and edit to make your own intent handler
         // uncomment `intentMap.set('your intent name here', yourFunctionHandler);`
@@ -144,6 +163,7 @@ module.exports = {
         intentMap.set('kanji.explain', kanjiExplain);
         intentMap.set('kanji.random', randomKanji);
         intentMap.set('kanji.examples', kanjiExamples);
+        intentMap.set('quiz.start', quizTest);
 
         // intentMap.set('your intent name here', yourFunctionHandler);
         // intentMap.set('your intent name here', googleAssistantHandler);
