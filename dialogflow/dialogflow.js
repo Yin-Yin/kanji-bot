@@ -170,8 +170,10 @@ module.exports = {
             let kanjiData = kanjiModule.getKanjiData(request.body.queryResult.parameters.kanji_single);
             //console.log(request.body.queryResult.parameters.kanji_single);
             if (kanjiData.kanji.meaning.english.includes(request.body.queryResult.parameters.any)) {
+                agent.add("✔️");
                 agent.add("Correct! ", kanjiData.kanji.character, " means ", kanjiData.kanji.meaning.english);
             } else {
+                agent.add("❌");
                 agent.add("No. Actually ", kanjiData.kanji.character, " means ", kanjiData.kanji.meaning.english);
             }
             //console.log(request.body.queryResult.parameters.any);
