@@ -167,10 +167,14 @@ module.exports = {
         }
         
         function quizCheckTest(agent) {
-            
-            console.log(request.body.queryResult.parameters.kanji_single);
-            console.log(request.body.queryResult.parameters.any);
-            
+            let kanjiData = kanjiModule.getKanjiData(request.body.queryResult.parameters.kanji_single);
+            //console.log(request.body.queryResult.parameters.kanji_single);
+            if (kanjiData.kanji.meaning.english.includes(request.body.queryResult.parameters.any)) {
+                agent.add("Correct! ", kanjiData.kanji.character, " means ", kanjiData.kanji.meaning.english);
+            } else {
+                agent.add("No. Actually ", kanjiData.kanji.character, " means ", kanjiData.kanji.meaning.english);
+            }
+            //console.log(request.body.queryResult.parameters.any);
         }
 
         // // Uncomment and edit to make your own Google Assistant intent handler
