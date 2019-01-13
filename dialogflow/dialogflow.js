@@ -5,7 +5,7 @@
 const { WebhookClient } = require('dialogflow-fulfillment');
 const { Card, Suggestion } = require('dialogflow-fulfillment');
 const https = require('https');
-const kanjiModule = require('./dialogflow/dialogflow.js');
+const kanjiModule = require('../kanji_module/kanji_module.js');
 
 const optionsKanjialiveRapidapi = {
     hostname: 'kanjialive-api.p.rapidapi.com',
