@@ -2,6 +2,7 @@
 const utilsModule = require('../utils_module/utils_module.js');
 
 const kanjiMap = new Map();
+const allKanjiArray = new Array;
 
 const optionsKanjialiveRapidapi = {
     hostname: 'kanjialive-api.p.rapidapi.com',
@@ -20,12 +21,9 @@ module.exports = {
         optionsKanjialiveRapidapi.path = '/api/public/kanji/all'
         utilsModule.makeHttpsRequest(optionsKanjialiveRapidapi).then(
                     resData => {
-                        //console.log("resData", resData);
-                        for (let kanjiNumber in resData) {
-                            console.log("kanjiNumber", kanjiNumber);
-                            //console.log("kanji", resData[kanjiNumber].kanji.character);
-                            //console.log("resData[kanji]", resData[kanjiNumber]);
-                            kanjiMap.set(resData[kanjiNumber].kanji.character, resData[kanjiNumber])
+                        for (let index in resData) {
+                            kanjiMap.set(resData[index].kanji.character, resData[index])
+                            allKanjiArray.push(resData[index].kanji.character);
                         }
                     }
                 );
@@ -33,5 +31,12 @@ module.exports = {
     
     getKanjiData: (kanji) => {
         return kanjiMap.get(kanji);
-    }
+    },
+    
+    getRandomKanjiData: () => {
+        console.log("allKanjiArray.length", allKanjiArray.length);
+        let randomKanji = allKanjiArray[Math.floor(Math.random()*allKanjiArray.length)];
+        console.log("random kanji = ", randomKanji);
+        return kanjiMap.get(randomKanji);
+    },
 };
