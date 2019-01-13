@@ -124,17 +124,21 @@ module.exports = {
             agent.add('Choose the correct meaning of the kanji: ' + randomKanji1.kanji.character);
             let i = 4;
             let qustionNumbers = [1,2,3,4];
+            let randomKanjis = [randomKanji1,randomKanji2,randomKanji3,randomKanji4];
             while (i > 0)  {
                 console.log(i);
                 // console.log(Math.floor(Math.random()*4))
-                let randomQuestionNumber = qustionNumbers.splice(Math.floor(Math.random()*qustionNumbers.length));
-                console.log("randomQuestionNumber", randomQuestionNumber);
+                let randomKanji = randomKanji.splice(Math.floor(Math.random()*randomKanji.length), 1);
+                console.log("randomQuestionNumber", randomKanji);
+                agent.add(new Suggestion(randomKanji1.kanji.character + ` means ` + randomKanji.kanji.meaning.english));
                 i--;
             }
+            /*
             agent.add(new Suggestion(randomKanji1.kanji.character + ` means ` + randomKanji1.kanji.meaning.english));
             agent.add(new Suggestion(randomKanji1.kanji.character + ` means ` + randomKanji2.kanji.meaning.english));
             agent.add(new Suggestion(randomKanji1.kanji.character + ` means ` + randomKanji3.kanji.meaning.english));
             agent.add(new Suggestion(randomKanji1.kanji.character + ` means ` + randomKanji4.kanji.meaning.english));
+            */
         }
 
         // Uncomment and edit to make your own intent handler
