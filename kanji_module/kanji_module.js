@@ -20,11 +20,12 @@ module.exports = {
         optionsKanjialiveRapidapi.path = '/api/public/kanji/all'
         utilsModule.makeHttpsRequest(optionsKanjialiveRapidapi).then(
                     resData => {
-                        console.log("resData", resData);
-                        for (let kanji in resData) {
-                            console.log("kanji", kanji);
-                            console.log("resData[kanji]", resData[kanji]);
-                            //kanjiMap.set()
+                        //console.log("resData", resData);
+                        for (let kanjiNumber in resData) {
+                            console.log("kanjiNumber", kanjiNumber);
+                            console.log("kanji", resData[kanjiNumber].kanji.character);
+                            //console.log("resData[kanji]", resData[kanjiNumber]);
+                            kanjiMap.set(resData[kanjiNumber].kanji.character, resData[kanjiNumber])
                         }
                     }
                 );
