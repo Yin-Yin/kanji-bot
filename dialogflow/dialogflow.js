@@ -123,10 +123,12 @@ module.exports = {
             }));*/
             agent.add('Choose the correct meaning of the kanji: ' + randomKanji1.kanji.character);
             let i = 4;
-            let usedAlready = [];
-            while (i >= 0)  {
+            let qustionNumbers = [1,2,3,4];
+            while (i > 0)  {
                 console.log(i);
-                console.log(Math.floor(Math.random()*4))
+                // console.log(Math.floor(Math.random()*4))
+                let randomQuestionNumber = qustionNumbers.splice(Math.floor(Math.random()*qustionNumbers.length));
+                console.log("randomQuestionNumber", randomQuestionNumber);
                 i--;
             }
             agent.add(new Suggestion(randomKanji1.kanji.character + ` means ` + randomKanji1.kanji.meaning.english));
