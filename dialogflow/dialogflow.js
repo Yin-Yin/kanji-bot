@@ -4,7 +4,8 @@
 
 const { WebhookClient } = require('dialogflow-fulfillment');
 const { Card, Suggestion } = require('dialogflow-fulfillment');
-const { Https } = require('https');
+const https = require('https');
+const kanjiModule = require('./dialogflow/dialogflow.js');
 
 const optionsKanjialiveRapidapi = {
     hostname: 'kanjialive-api.p.rapidapi.com',
@@ -16,7 +17,6 @@ const optionsKanjialiveRapidapi = {
     }
 };
 // google translate https://cloud.google.com/translate/docs/quickstart-client-libraries#client-libraries-install-nodejs 
-
 
 module.exports = {
     handleRequest: (request, response) => {
@@ -96,7 +96,7 @@ module.exports = {
         function makeHttpsRequest(options) {
             return new Promise(function(resolve, reject) {
                 
-                const req = Https.request(options, (res) => {
+                const req = https.request(options, (res) => {
                     console.log(`statusCode: ${res.statusCode}`)
                     
                     res.on('data', (resData) => {

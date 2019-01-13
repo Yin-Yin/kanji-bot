@@ -1,9 +1,9 @@
 'use strict';
 // ## express server ##
-var bodyParser = require('body-parser')
-var express = require('express');
-var app = express();
-var dialogflowModule = require('./dialogflow/dialogflow.js');
+const bodyParser = require('body-parser')
+const express = require('express');
+const app = express();
+const dialogflowModule = require('./dialogflow/dialogflow.js');
 
 console.log("starting server ...");
 
