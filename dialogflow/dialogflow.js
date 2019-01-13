@@ -134,7 +134,7 @@ module.exports = {
             let j = 3;
             while (j >= 0) {
                 console.log(j);
-                agent.add(new Suggestion(randomKanjis[j].kanji.character + ` means ` + randomKanjis[j].kanji.meaning.english));
+                agent.add(new Suggestion(solutionKanji.kanji.character + ` means ` + randomKanjis[j].kanji.meaning.english));
                 // console.log(Math.floor(Math.random()*4))
                 //let randomQuestionNumber = qustionNumbers.splice(Math.floor(Math.random() * qustionNumbers.length), 1);
                 //console.log("randomQuestionNumber", randomQuestionNumber);
@@ -147,6 +147,17 @@ module.exports = {
             agent.add(new Suggestion(randomKanji1.kanji.character + ` means ` + randomKanji3.kanji.meaning.english));
             agent.add(new Suggestion(randomKanji1.kanji.character + ` means ` + randomKanji4.kanji.meaning.english));
             */
+        }
+        
+        function quizCheckTest(agent) {
+            let kanjiData = kanjiModule.getKanjiData(request.body.queryResult.parameters.kanji_single);
+            //console.log(request.body.queryResult.parameters.kanji_single);
+            if (kanjiData.kanji.meaning.english.includes(request.body.queryResult.parameters.any)) {
+                agent.add("✔️ \n Correct! " + kanjiData.kanji.character + " means " + kanjiData.kanji.meaning.english);
+            } else {
+                agent.add("❌ \n No. Actually " + kanjiData.kanji.character + " means " + kanjiData.kanji.meaning.english);
+            }
+            //console.log(request.body.queryResult.parameters.any);
         }
 
         // Uncomment and edit to make your own intent handler
@@ -166,18 +177,7 @@ module.exports = {
             agent.setContext({ name: 'weather', lifespan: 2, parameters: { city: 'Rome' } });
         }
         
-        function quizCheckTest(agent) {
-            let kanjiData = kanjiModule.getKanjiData(request.body.queryResult.parameters.kanji_single);
-            //console.log(request.body.queryResult.parameters.kanji_single);
-            if (kanjiData.kanji.meaning.english.includes(request.body.queryResult.parameters.any)) {
-                agent.add("✔️");
-                agent.add("Correct! ", kanjiData.kanji.character, " means ", kanjiData.kanji.meaning.english);
-            } else {
-                agent.add("❌");
-                agent.add("No. Actually ", kanjiData.kanji.character, " means ", kanjiData.kanji.meaning.english);
-            }
-            //console.log(request.body.queryResult.parameters.any);
-        }
+
 
         // // Uncomment and edit to make your own Google Assistant intent handler
         // // uncomment `intentMap.set('your intent name here', googleAssistantHandler);`
