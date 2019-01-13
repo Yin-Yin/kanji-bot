@@ -37,6 +37,6 @@ module.exports = {
         console.log("allKanjiArray.length", allKanjiArray.length);
         let randomKanji = allKanjiArray[Math.floor(Math.random()*allKanjiArray.length)];
         console.log("random kanji = ", randomKanji);
-        return kanjiMap.get(randomKanji);
+        return randomKanji;
     },
 };
