@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const express = require('express');
 const app = express();
 const dialogflowModule = require('./dialogflow/dialogflow.js');
+const kanjiModule = require('./kanji_module/kanji_module.js');
 
 console.log("starting server ...");
 
@@ -30,6 +31,8 @@ app.use((req, res, next) => {
   next()
 
 })
+
+kanjiModule.initKanjiData(); // initialize kanji data (load all Kanjis in memory from API)
 
 // parse application/x-www-form-urlencoded 
 app.use(bodyParser.urlencoded({ extended: false }));
