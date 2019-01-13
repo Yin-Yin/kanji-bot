@@ -15,6 +15,7 @@ const optionsKanjialiveRapidapi = {
         'X-RapidAPI-Key': process.env.rapidapi_key
     }
 };
+// google translate https://cloud.google.com/translate/docs/quickstart-client-libraries#client-libraries-install-nodejs 
 
 
 module.exports = {
@@ -41,7 +42,7 @@ module.exports = {
                 makeHttpsRequest(optionsKanjialiveRapidapi).then(
                     resData => {
                         console.log("resData", resData);
-                        console.log("resData.kanji.character", resData.kanji.character);
+                        console.log("resData.kanji.character", resData.examples[0].meaning);
                         agent.add("Kanji: " + resData.kanji.character);
                         agent.add("Meaning: " + resData.kanji.meaning.english);
                         agent.add("Radical: " + resData.radical.character);
@@ -93,15 +94,12 @@ module.exports = {
 
         // toDo: put this function below
         function makeHttpsRequest(options) {
-            // toDo: what does  process.stdout do?
-            // toDo: make as promise
             return new Promise(function(resolve, reject) {
+                
                 const req = https.request(options, (res) => {
                     console.log(`statusCode: ${res.statusCode}`)
-
+                    
                     res.on('data', (resData) => {
-                        //process.stdout.write(d);
-                        console.log('data: ', resData);
                         resolve(JSON.parse(resData));
                     })
                 })
@@ -112,6 +110,7 @@ module.exports = {
                 })
 
                 req.end();
+                
 
             });
         };
