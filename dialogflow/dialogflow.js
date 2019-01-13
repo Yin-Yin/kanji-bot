@@ -108,12 +108,12 @@ module.exports = {
             });
         }
         */
-        
+
         function quizTest(agent) {
-            let randomKanji1 = kanjiModule.getRandomKanjiData();
+            /*let randomKanji1 = kanjiModule.getRandomKanjiData();
             let randomKanji2 = kanjiModule.getRandomKanjiData();
             let randomKanji3 = kanjiModule.getRandomKanjiData();
-            let randomKanji4 = kanjiModule.getRandomKanjiData();
+            let randomKanji4 = kanjiModule.getRandomKanjiData();*/
             /*agent.add(new Card({
                 title: `Choose the correct meaning of the kanji: ` + randomKanji1.kanji.character,
                 imageUrl: 'https://developers.google.com/actions/images/badges/XPM_BADGING_GoogleAssistant_VER.png',
@@ -121,23 +121,31 @@ module.exports = {
                 buttonText: 'This is a button',
                 buttonUrl: 'https://assistant.google.com/'
             }));*/
-            agent.add('Choose the correct meaning of the kanji: ' + randomKanji1.kanji.character);
             let i = 4;
-            let qustionNumbers = [1,2,3,4];
-            while (i > 0)  {
+            let randomKanjis = []
+            while (i > 0) {
                 console.log(i);
+                randomKanjis.push(kanjiModule.getRandomKanjiData());
+                i--;
+            }
+            let solutionKanji = randomKanjis[Math.floor(Math.random() * randomKanjis.length)];
+            agent.add('Choose the correct meaning of the kanji: ' + solutionKanji.kanji.character);
+            let qustionNumbers = [1, 2, 3, 4];
+            while (i > 0) {
+                agent.add(new Suggestion(randomKanjis[i].kanji.character + ` means ` + randomKanjis[i].kanji.meaning.english));
+                //console.log(i);
                 // console.log(Math.floor(Math.random()*4))
-                let randomQuestionNumber = qustionNumbers.splice(Math.floor(Math.random()*qustionNumbers.length), 1);
-                console.log("randomQuestionNumber", randomQuestionNumber);
+                //let randomQuestionNumber = qustionNumbers.splice(Math.floor(Math.random() * qustionNumbers.length), 1);
+                //console.log("randomQuestionNumber", randomQuestionNumber);
                 //gent.add(new Suggestion(randomKanji1.kanji.character + ` means ` + randomKanji1.kanji.meaning.english));
                 i--;
             }
-            /**/
+            /*
             agent.add(new Suggestion(randomKanji1.kanji.character + ` means ` + randomKanji1.kanji.meaning.english));
             agent.add(new Suggestion(randomKanji1.kanji.character + ` means ` + randomKanji2.kanji.meaning.english));
             agent.add(new Suggestion(randomKanji1.kanji.character + ` means ` + randomKanji3.kanji.meaning.english));
             agent.add(new Suggestion(randomKanji1.kanji.character + ` means ` + randomKanji4.kanji.meaning.english));
-            /**/
+            */
         }
 
         // Uncomment and edit to make your own intent handler
