@@ -54,7 +54,7 @@ module.exports = {
             console.log("kanjiData", kanjiData);
             agent.add("Kanji: " + kanjiData.kanji.character);
             for (let index in kanjiData.examples) {
-                agent.add(index + ": " + kanjiData.examples[index].japanese);
+                agent.add(kanjiData.examples[index].japanese);
                 //console.log("meaning", kanjiData.examples[index].meaning);
                 //console.log("audio", kanjiData.examples[index].audio);
                 agent.add(kanjiData.examples[index].meaning.english);
@@ -62,9 +62,9 @@ module.exports = {
                 //agent.add(kanjiData.examples[index].audio.mp3);
                 agent.add(new Card({
                     title: `Listen to example`,
-                    imageUrl: kanjiData.kanji.video.poster,
+                    //imageUrl: kanjiData.kanji.video.poster,
                     //text: `This is the body text of a card.  You can even use line\n  breaks and emoji! 💁`,
-                    buttonText: 'listen to example',
+                    buttonText:  kanjiData.examples[index].japanese,
                     buttonUrl: kanjiData.examples[index].audio.mp3
                 }));
             }
