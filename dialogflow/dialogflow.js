@@ -134,7 +134,8 @@ module.exports = {
             let j = 4;
             while (j > 0) {
                 console.log(j);
-                agent.add(new Suggestion(randomKanjis[j].kanji.character + ` means ` + randomKanjis[j].kanji.meaning.english));
+                let k = j -1;
+                agent.add(new Suggestion(randomKanjis[k].kanji.character + ` means ` + randomKanjis[k].kanji.meaning.english));
                 // console.log(Math.floor(Math.random()*4))
                 //let randomQuestionNumber = qustionNumbers.splice(Math.floor(Math.random() * qustionNumbers.length), 1);
                 //console.log("randomQuestionNumber", randomQuestionNumber);
