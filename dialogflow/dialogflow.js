@@ -58,7 +58,7 @@ module.exports = {
                 //console.log("meaning", kanjiData.examples[index].meaning);
                 //console.log("audio", kanjiData.examples[index].audio);
                 agent.add(kanjiData.examples[index].meaning.english);
-                agent.add(kanjiData.examples[index].audio.mp3);
+                // agent.add(kanjiData.examples[index].audio.mp3);
                 //agent.add(kanjiData.examples[index].audio.mp3);
                 agent.add(new Card({
                     title: `Listen to example`,
