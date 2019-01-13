@@ -131,14 +131,15 @@ module.exports = {
             let solutionKanji = randomKanjis[Math.floor(Math.random() * randomKanjis.length)];
             agent.add('Choose the correct meaning of the kanji: ' + solutionKanji.kanji.character);
             let qustionNumbers = [1, 2, 3, 4];
-            while (i > 0) {
+            let j = 4;
+            while (j > 0) {
                 agent.add(new Suggestion(randomKanjis[i].kanji.character + ` means ` + randomKanjis[i].kanji.meaning.english));
                 //console.log(i);
                 // console.log(Math.floor(Math.random()*4))
                 //let randomQuestionNumber = qustionNumbers.splice(Math.floor(Math.random() * qustionNumbers.length), 1);
                 //console.log("randomQuestionNumber", randomQuestionNumber);
                 //gent.add(new Suggestion(randomKanji1.kanji.character + ` means ` + randomKanji1.kanji.meaning.english));
-                i--;
+                j--;
             }
             /*
             agent.add(new Suggestion(randomKanji1.kanji.character + ` means ` + randomKanji1.kanji.meaning.english));
@@ -164,6 +165,13 @@ module.exports = {
             agent.add(new Suggestion(`Suggestion`));
             agent.setContext({ name: 'weather', lifespan: 2, parameters: { city: 'Rome' } });
         }
+        
+        function quizCheckTest(agent) {
+            
+            console.log(request.body.queryResult.parameters.kanji_single);
+            console.log(request.body.queryResult.parameters.any);
+            
+        }
 
         // // Uncomment and edit to make your own Google Assistant intent handler
         // // uncomment `intentMap.set('your intent name here', googleAssistantHandler);`
@@ -184,6 +192,7 @@ module.exports = {
         intentMap.set('kanji.random', randomKanji);
         intentMap.set('kanji.examples', kanjiExamples);
         intentMap.set('quiz.start', quizTest);
+        intentMap.set('quiz.checkTest', quizCheckTest);
 
         // intentMap.set('your intent name here', yourFunctionHandler);
         // intentMap.set('your intent name here', googleAssistantHandler);
