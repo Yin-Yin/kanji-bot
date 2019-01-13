@@ -133,7 +133,7 @@ module.exports = {
             let qustionNumbers = [1, 2, 3, 4];
             let j = 4;
             while (j > 0) {
-                agent.add(new Suggestion(randomKanjis[i].kanji.character + ` means ` + randomKanjis[i].kanji.meaning.english));
+                agent.add(new Suggestion(randomKanjis[j].kanji.character + ` means ` + randomKanjis[j].kanji.meaning.english));
                 //console.log(i);
                 // console.log(Math.floor(Math.random()*4))
                 //let randomQuestionNumber = qustionNumbers.splice(Math.floor(Math.random() * qustionNumbers.length), 1);
