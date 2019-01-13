@@ -10,6 +10,7 @@ module.exports = {
                 console.log(`statusCode: ${res.statusCode}`)
 
                 res.on('data', (resData) => {
+                    console.log("resData", resData);
                     resolve(JSON.parse(resData));
                 })
             })

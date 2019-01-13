@@ -43,6 +43,9 @@ module.exports = {
                     resData => {
                         console.log("resData", resData);
                         console.log("resData.kanji.character", resData.examples[0].meaning);
+                        // ***************** 
+                        kanjiModule.initKanjiData();
+                        // ***************** 
                         agent.add("Kanji: " + resData.kanji.character);
                         agent.add("Meaning: " + resData.kanji.meaning.english);
                         agent.add("Radical: " + resData.radical.character);
