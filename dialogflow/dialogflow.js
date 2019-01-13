@@ -46,24 +46,34 @@ module.exports = {
             agent.add("Kunyomi: " + kanjiData.kanji.kunyomi.hiragana + " (" + kanjiData.kanji.kunyomi.romaji + ")");
             agent.add("Example:" + kanjiData.examples[0].japanese);
             agent.add(new Suggestion(`Radical ` + kanjiData.radical.character));
+            agent.add(new Suggestion(`Examples ` + kanjiData.radical.character));
         }
-        
+
         function kanjiExamples(agent) {
             let kanjiData = kanjiModule.getKanjiData(request.body.queryResult.parameters.kanji_single);
             console.log("kanjiData", kanjiData);
             agent.add("Kanji: " + kanjiData.kanji.character);
             for (let index in kanjiData.examples) {
-                agent.add("Example "+ index + ":" + kanjiData.examples[index].japanese);
-                console.log("meaning", kanjiData.examples[index].meaning);
-                console.log("audio", kanjiData.examples[index].audio);
-                // agent.add("Example "+ index + ":" + kanjiData.examples[index].meaning);
+                agent.add(index + ": " + kanjiData.examples[index].japanese);
+                //console.log("meaning", kanjiData.examples[index].meaning);
+                //console.log("audio", kanjiData.examples[index].audio);
+                agent.add(kanjiData.examples[index].meaning.english);
+                agent.add(kanjiData.examples[index].audio.mp3);
+                //agent.add(kanjiData.examples[index].audio.mp3);
+                agent.add(new Card({
+                    //title: `Title: this is a card title`,
+                    imageUrl: kanjiData.video.poster,
+                    //text: `This is the body text of a card.  You can even use line\n  breaks and emoji! 💁`,
+                    buttonText: 'listen to example',
+                    buttonUrl: kanjiData.examples[index].audio.mp3
+                }));
             }
-            agent.add("Meaning: " + kanjiData.kanji.meaning.english);
+            /*agent.add("Meaning: " + kanjiData.kanji.meaning.english);
             agent.add("Radical: " + kanjiData.radical.character);
             agent.add("Onyomi: " + kanjiData.kanji.onyomi.katakana + " (" + kanjiData.kanji.onyomi.romaji + ")");
             agent.add("Kunyomi: " + kanjiData.kanji.kunyomi.hiragana + " (" + kanjiData.kanji.kunyomi.romaji + ")");
             agent.add("Example:" + kanjiData.examples[0].japanese);
-            agent.add(new Suggestion(`Radical ` + kanjiData.radical.character));
+            agent.add(new Suggestion(`Radical ` + kanjiData.radical.character));*/
         }
 
         function randomKanji(agent) {
@@ -134,7 +144,7 @@ module.exports = {
         intentMap.set('kanji.explain', kanjiExplain);
         intentMap.set('kanji.random', randomKanji);
         intentMap.set('kanji.examples', kanjiExamples);
-        
+
         // intentMap.set('your intent name here', yourFunctionHandler);
         // intentMap.set('your intent name here', googleAssistantHandler);
         agent.handleRequest(intentMap);
