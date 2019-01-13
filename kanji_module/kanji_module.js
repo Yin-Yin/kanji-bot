@@ -23,7 +23,7 @@ module.exports = {
                         //console.log("resData", resData);
                         for (let kanjiNumber in resData) {
                             console.log("kanjiNumber", kanjiNumber);
-                            console.log("kanji", resData[kanjiNumber].kanji.character);
+                            //console.log("kanji", resData[kanjiNumber].kanji.character);
                             //console.log("resData[kanji]", resData[kanjiNumber]);
                             kanjiMap.set(resData[kanjiNumber].kanji.character, resData[kanjiNumber])
                         }

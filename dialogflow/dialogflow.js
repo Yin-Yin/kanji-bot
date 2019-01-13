@@ -38,10 +38,12 @@ module.exports = {
 
         function kanjiExplain(agent) {
             return new Promise((resolve, reject) => {
-                console.log("get kanji data from map: ", kanjiModule.getKanjiData(request.body.queryResult.parameters.kanji_single));
-                optionsKanjialiveRapidapi.path = '/api/public/kanji/' + encodeURIComponent(request.body.queryResult.parameters.kanji_single);
+                //console.log("get kanji data from map: ", kanjiModule.getKanjiData(request.body.queryResult.parameters.kanji_single));
+                let kanjiData = kanjiModule.getKanjiData(request.body.queryResult.parameters.kanji_single);
+                /*optionsKanjialiveRapidapi.path = '/api/public/kanji/' + encodeURIComponent(request.body.queryResult.parameters.kanji_single);
                 utilsModule.makeHttpsRequest(optionsKanjialiveRapidapi).then(
                     resData => {
+                   
                         console.log("resData", resData);
                         console.log("resData.kanji.character", resData.examples[0].meaning);
                         agent.add("Kanji: " + resData.kanji.character);
@@ -51,8 +53,17 @@ module.exports = {
                         agent.add("Kunyomi: " + resData.kanji.kunyomi.hiragana  + " (" + resData.kanji.kunyomi.romaji + ")");
                         agent.add("Example:" + resData.examples[0].japanese);
                         resolve();
-                    }
-                );
+                   }
+                );*/
+                console.log("kanjiData", kanjiData);
+                //console.log("resData.kanji.character", resData.examples[0].meaning);
+                agent.add("Kanji: " + kanjiData.kanji.character);
+                agent.add("Meaning: " + kanjiData.kanji.meaning.english);
+                agent.add("Radical: " + kanjiData.radical.character);
+                agent.add("Onyomi: " + kanjiData.kanji.onyomi.katakana + " (" + kanjiData.kanji.onyomi.romaji + ")");
+                agent.add("Kunyomi: " + kanjiData.kanji.kunyomi.hiragana + " (" + kanjiData.kanji.kunyomi.romaji + ")");
+                agent.add("Example:" + kanjiData.examples[0].japanese);
+                resolve();
             });
         }
 
