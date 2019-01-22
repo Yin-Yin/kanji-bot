@@ -134,6 +134,10 @@ module.exports = {
             }
             let solutionKanji = randomKanjis[Math.floor(Math.random() * randomKanjis.length)];
             agent.add('Choose the correct meaning of the kanji: ' + solutionKanji.kanji.character);
+            for (let index in randomKanjis) {
+                agent.add(new Suggestion(solutionKanji.kanji.character + ` means ` + randomKanjis[index].kanji.meaning.english));
+            }
+            /*
             // let qustionNumbers = [1, 2, 3, 4];
             let j = 3;
             while (j >= 0) {
@@ -145,6 +149,7 @@ module.exports = {
                 //gent.add(new Suggestion(randomKanji1.kanji.character + ` means ` + randomKanji1.kanji.meaning.english));
                 j--;
             }
+            */
             /*
             agent.add(new Suggestion(randomKanji1.kanji.character + ` means ` + randomKanji1.kanji.meaning.english));
             agent.add(new Suggestion(randomKanji1.kanji.character + ` means ` + randomKanji2.kanji.meaning.english));
