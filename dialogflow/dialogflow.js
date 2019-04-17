@@ -20,7 +20,7 @@ const optionsKanjialiveRapidapi = {
 
 module.exports = {
     handleRequest: (request, response) => {
-        console.log("handleRequest invoked");
+        console.log('handleRequest invoked');
         //return new Promise((resolve, reject) => {
 
         const agent = new WebhookClient({ request, response });
@@ -38,34 +38,34 @@ module.exports = {
 
         function kanjiExplain(agent) {
             let kanjiData = kanjiModule.getKanjiData(request.body.queryResult.parameters.kanji_single);
-            console.log("kanjiData", kanjiData);
+            console.log('kanjiData', kanjiData);
             agent.add(new Card({
-                title: "Kanji: " + kanjiData.kanji.character,
+                title: 'Kanji: ' + kanjiData.kanji.character,
                 imageUrl: kanjiData.kanji.video.poster,
-                text: "Meaning: " + kanjiData.kanji.meaning.english + "\n Radical: " + kanjiData.radical.character + "\n Onyomi: " + kanjiData.kanji.onyomi.katakana + " (" + kanjiData.kanji.onyomi.romaji + ") \n Kunyomi: " + kanjiData.kanji.kunyomi.hiragana + " (" + kanjiData.kanji.kunyomi.romaji + ")",
+                text: 'Meaning: ' + kanjiData.kanji.meaning.english + '\n Radical: ' + kanjiData.radical.character + '\n Onyomi: ' + kanjiData.kanji.onyomi.katakana + ' (' + kanjiData.kanji.onyomi.romaji + ') \n Kunyomi: ' + kanjiData.kanji.kunyomi.hiragana + ' (' + kanjiData.kanji.kunyomi.romaji + ')',
                 //buttonText: 'Listen to example',
                 //buttonUrl: kanjiData.examples[index].audio.mp3
             }));
             /*
-        agent.add("Kanji: " + kanjiData.kanji.character);
-        agent.add("Meaning: " + kanjiData.kanji.meaning.english);
-        agent.add("Radical: " + kanjiData.radical.character);
-        agent.add("Onyomi: " + kanjiData.kanji.onyomi.katakana + " (" + kanjiData.kanji.onyomi.romaji + ")");
-        agent.add("Kunyomi: " + kanjiData.kanji.kunyomi.hiragana + " (" + kanjiData.kanji.kunyomi.romaji + ")");
+        agent.add('Kanji: ' + kanjiData.kanji.character);
+        agent.add('Meaning: ' + kanjiData.kanji.meaning.english);
+        agent.add('Radical: ' + kanjiData.radical.character);
+        agent.add('Onyomi: ' + kanjiData.kanji.onyomi.katakana + ' (' + kanjiData.kanji.onyomi.romaji + ')');
+        agent.add('Kunyomi: ' + kanjiData.kanji.kunyomi.hiragana + ' (' + kanjiData.kanji.kunyomi.romaji + ')');
         */
-            agent.add("Example:" + kanjiData.examples[0].japanese);
+            agent.add('Example:' + kanjiData.examples[0].japanese);
             agent.add(new Suggestion(`Radical ` + kanjiData.radical.character));
             agent.add(new Suggestion(`Examples ` + kanjiData.kanji.character));
         }
 
         function kanjiExamples(agent) {
             let kanjiData = kanjiModule.getKanjiData(request.body.queryResult.parameters.kanji_single);
-            console.log("kanjiData", kanjiData);
-            agent.add("Kanji: " + kanjiData.kanji.character);
+            console.log('kanjiData', kanjiData);
+            agent.add('Kanji: ' + kanjiData.kanji.character);
             for (let index in kanjiData.examples) {
                 //agent.add(kanjiData.examples[index].japanese);
-                //console.log("meaning", kanjiData.examples[index].meaning);
-                //console.log("audio", kanjiData.examples[index].audio);
+                //console.log('meaning', kanjiData.examples[index].meaning);
+                //console.log('audio', kanjiData.examples[index].audio);
                 //agent.add(kanjiData.examples[index].meaning.english);
                 // agent.add(kanjiData.examples[index].audio.mp3);
                 //agent.add(kanjiData.examples[index].audio.mp3);
@@ -77,19 +77,19 @@ module.exports = {
                     buttonUrl: kanjiData.examples[index].audio.mp3
                 }));
             }
-            /*agent.add("Meaning: " + kanjiData.kanji.meaning.english);
-            agent.add("Radical: " + kanjiData.radical.character);
-            agent.add("Onyomi: " + kanjiData.kanji.onyomi.katakana + " (" + kanjiData.kanji.onyomi.romaji + ")");
-            agent.add("Kunyomi: " + kanjiData.kanji.kunyomi.hiragana + " (" + kanjiData.kanji.kunyomi.romaji + ")");
-            agent.add("Example:" + kanjiData.examples[0].japanese);
+            /*agent.add('Meaning: ' + kanjiData.kanji.meaning.english);
+            agent.add('Radical: ' + kanjiData.radical.character);
+            agent.add('Onyomi: ' + kanjiData.kanji.onyomi.katakana + ' (' + kanjiData.kanji.onyomi.romaji + ')');
+            agent.add('Kunyomi: ' + kanjiData.kanji.kunyomi.hiragana + ' (' + kanjiData.kanji.kunyomi.romaji + ')');
+            agent.add('Example:' + kanjiData.examples[0].japanese);
             agent.add(new Suggestion(`Radical ` + kanjiData.radical.character));*/
         }
 
         function randomKanji(agent) {
             let kanjiData = kanjiModule.getRandomKanjiData();
             // let kanjiData = kanjiModule.getKanjiData(randomKanji);
-            console.log("kanjiData", kanjiData);
-            agent.add("Kanji: " + kanjiData.kanji.character + "\n Meaning: " + kanjiData.kanji.meaning.english + "\n Radical: " + kanjiData.radical.character + "\n Onyomi: " + kanjiData.kanji.onyomi.katakana + " (" + kanjiData.kanji.onyomi.romaji + ") \n Kunyomi: " + kanjiData.kanji.kunyomi.hiragana + " (" + kanjiData.kanji.kunyomi.romaji + ")");
+            console.log('kanjiData', kanjiData);
+            agent.add('Kanji: ' + kanjiData.kanji.character + '\n Meaning: ' + kanjiData.kanji.meaning.english + '\n Radical: ' + kanjiData.radical.character + '\n Onyomi: ' + kanjiData.kanji.onyomi.katakana + ' (' + kanjiData.kanji.onyomi.romaji + ') \n Kunyomi: ' + kanjiData.kanji.kunyomi.hiragana + ' (' + kanjiData.kanji.kunyomi.romaji + ')');
             agent.add(new Suggestion(`Radical ` + kanjiData.radical.character));
         }
 
@@ -99,13 +99,13 @@ module.exports = {
                 optionsKanjialiveRapidapi.path = '/api/public/kanji/' + encodeURIComponent(request.body.queryResult.parameters.kanji_single);
                 utilsModule.makeHttpsRequest(optionsKanjialiveRapidapi).then(
                     resData => {
-                        console.log("resData", resData);
-                        agent.add("Kanji: " + resData.kanji.character);
-                        agent.add("Meaning: " + resData.kanji.meaning.english);
-                        agent.add("Radical: " + resData.radical.character);
-                        agent.add("Onyomi: " + resData.kanji.onyomi.katakana + " (" + resData.kanji.onyomi.romaji + ")");
-                        agent.add("Kunyomi: " + resData.kanji.kunyomi.hiragana + " (" + resData.kanji.kunyomi.romaji + ")");
-                        agent.add("Example:" + resData.examples[0].japanese);
+                        console.log('resData', resData);
+                        agent.add('Kanji: ' + resData.kanji.character);
+                        agent.add('Meaning: ' + resData.kanji.meaning.english);
+                        agent.add('Radical: ' + resData.radical.character);
+                        agent.add('Onyomi: ' + resData.kanji.onyomi.katakana + ' (' + resData.kanji.onyomi.romaji + ')');
+                        agent.add('Kunyomi: ' + resData.kanji.kunyomi.hiragana + ' (' + resData.kanji.kunyomi.romaji + ')');
+                        agent.add('Example:' + resData.examples[0].japanese);
                         resolve();
                     }
                 );
@@ -135,7 +135,7 @@ module.exports = {
             let solutionKanji = randomKanjis[Math.floor(Math.random() * randomKanjis.length)];
             agent.add('Choose the correct meaning of the kanji: ' + solutionKanji.kanji.character);
             for (let index in randomKanjis) {
-                agent.add(new Suggestion(solutionKanji.kanji.character + ` means ` + randomKanjis[index].kanji.meaning.english));
+                agent.add(new Suggestion(solutionKanji.kanji.character + ' means ' + randomKanjis[index].kanji.meaning.english));
             }
             /*
             // let qustionNumbers = [1, 2, 3, 4];
@@ -145,7 +145,7 @@ module.exports = {
                 agent.add(new Suggestion(solutionKanji.kanji.character + ` means ` + randomKanjis[j].kanji.meaning.english));
                 // console.log(Math.floor(Math.random()*4))
                 //let randomQuestionNumber = qustionNumbers.splice(Math.floor(Math.random() * qustionNumbers.length), 1);
-                //console.log("randomQuestionNumber", randomQuestionNumber);
+                //console.log('randomQuestionNumber', randomQuestionNumber);
                 //gent.add(new Suggestion(randomKanji1.kanji.character + ` means ` + randomKanji1.kanji.meaning.english));
                 j--;
             }
@@ -162,12 +162,23 @@ module.exports = {
             let kanjiData = kanjiModule.getKanjiData(request.body.queryResult.parameters.kanji_single);
             //console.log(request.body.queryResult.parameters.kanji_single);
             if (kanjiData.kanji.meaning.english.includes(request.body.queryResult.parameters.any)) {
-                agent.add("✔️ Correct! " + kanjiData.kanji.character + " means " + kanjiData.kanji.meaning.english);
+                agent.add('✔️ Correct! ' + kanjiData.kanji.character + ' means ' + kanjiData.kanji.meaning.english);
+                agent.add(new Suggestion('Quiz'));
             }
             else {
-                agent.add("❌ No. Actually " + kanjiData.kanji.character + " means " + kanjiData.kanji.meaning.english);
+                agent.add('❌ No. Actually ' + kanjiData.kanji.character + ' means ' + kanjiData.kanji.meaning.english);
             }
             //console.log(request.body.queryResult.parameters.any);
+        }
+
+        // ***** Menus *****
+        function menuMain() {
+            addStandardButtons();
+        }
+
+        function addStandardButtons() {
+            agent.add(new Suggestion('Kanji of the day'));
+            agent.add(new Suggestion('Quiz'));
         }
 
         // Uncomment and edit to make your own intent handler
@@ -204,9 +215,13 @@ module.exports = {
         let intentMap = new Map();
         intentMap.set('Default Welcome Intent', welcome);
         intentMap.set('Default Fallback Intent', fallback);
+        
+        intentMap.set('menu.main', menuMain);
+        
         intentMap.set('kanji.explain', kanjiExplain);
         intentMap.set('kanji.random', randomKanji);
         intentMap.set('kanji.examples', kanjiExamples);
+        
         intentMap.set('quiz.start', quizTest);
         intentMap.set('quiz.checkTest', quizCheckTest);
         agent.handleRequest(intentMap);
