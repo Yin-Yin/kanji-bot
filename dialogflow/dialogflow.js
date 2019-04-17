@@ -56,7 +56,7 @@ module.exports = {
             agent.add('Example:' + kanjiData.examples[0].japanese);
             agent.add(new Suggestion(`Radical ` + kanjiData.radical.character));
             agent.add(new Suggestion(`Examples ` + kanjiData.kanji.character));
-            agent.add(new Suggestion(`Menu`));
+            agent.add(new Suggestion(`Back`));
         }
 
         function kanjiExamples(agent) {
@@ -78,6 +78,7 @@ module.exports = {
                     buttonUrl: kanjiData.examples[index].audio.mp3
                 }));
             }
+            agent.add(new Suggestion(`Back`));
             /*agent.add('Meaning: ' + kanjiData.kanji.meaning.english);
             agent.add('Radical: ' + kanjiData.radical.character);
             agent.add('Onyomi: ' + kanjiData.kanji.onyomi.katakana + ' (' + kanjiData.kanji.onyomi.romaji + ')');
@@ -92,6 +93,7 @@ module.exports = {
             console.log('kanjiData', kanjiData);
             agent.add('Kanji: ' + kanjiData.kanji.character + '\n Meaning: ' + kanjiData.kanji.meaning.english + '\n Radical: ' + kanjiData.radical.character + '\n Onyomi: ' + kanjiData.kanji.onyomi.katakana + ' (' + kanjiData.kanji.onyomi.romaji + ') \n Kunyomi: ' + kanjiData.kanji.kunyomi.hiragana + ' (' + kanjiData.kanji.kunyomi.romaji + ')');
             agent.add(new Suggestion(`Radical ` + kanjiData.radical.character));
+            agent.add(new Suggestion(`Back`));
         }
 
         /*
@@ -160,7 +162,7 @@ module.exports = {
             //if (kanjiData.kanji.onyomi.katakana.includes(request.body.queryResult.parameters.any)) {
             if (kanjiData.kanji.onyomi.romaji.includes(request.body.queryResult.parameters.any)) {
                 agent.add('✔️ Correct! ' + kanjiData.kanji.character + ' means ' + kanjiData.kanji.onyomi.katakana);
-                agent.add(new Suggestion('Quiz Onyomi '));
+                agent.add(new Suggestion('Another Onyomi quiz?'));
                 agent.add(new Suggestion('back'));
             }
             else {
@@ -177,7 +179,8 @@ module.exports = {
 
         function addStandardButtons() {
             agent.add(new Suggestion('Kanji of the day'));
-            agent.add(new Suggestion('Quiz'));
+            agent.add(new Suggestion('Meaning Quiz'));
+            agent.add(new Suggestion('Onyomi Quiz'));
         }
 
         // Uncomment and edit to make your own intent handler
