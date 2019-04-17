@@ -42,9 +42,9 @@ module.exports = {
             let cardText = 'Meaning: ' + kanjiData.kanji.meaning.english + '\n Radical: ' + kanjiData.radical.character + '\n Onyomi: ' + kanjiData.kanji.onyomi.katakana + ' (' + kanjiData.kanji.onyomi.romaji + ') \n Kunyomi: ' + kanjiData.kanji.kunyomi.hiragana + ' (' + kanjiData.kanji.kunyomi.romaji + ')';
             agent.add(new Card({
                 title: 'Kanji: ' + kanjiData.kanji.character,
-                imageUrl: kanjiData.kanji.video.poster,
                 text: cardText
             }));
+            //imageUrl: kanjiData.kanji.video.poster,
             /*
             agent.add('Kanji: ' + kanjiData.kanji.character);
             agent.add('Meaning: ' + kanjiData.kanji.meaning.english);
@@ -52,9 +52,9 @@ module.exports = {
             //agent.add('Onyomi: ' + kanjiData.kanji.onyomi.katakana + ' (' + kanjiData.kanji.onyomi.romaji + ')');
             //agent.add('Kunyomi: ' + kanjiData.kanji.kunyomi.hiragana + ' (' + kanjiData.kanji.kunyomi.romaji + ')');
             */
-            agent.add('Example:' + kanjiData.examples[0].japanese);
+            //agent.add('Example:' + kanjiData.examples[0].japanese);
             //agent.add(new Suggestion(`Radical ` + kanjiData.radical.character));
-            agent.add(new Suggestion(`Examples ` + kanjiData.kanji.character));
+            //agent.add(new Suggestion(`Examples ` + kanjiData.kanji.character));
             agent.add(new Suggestion(`Back`));
         }
 
@@ -157,7 +157,7 @@ module.exports = {
 
         function quizKanjiOnyomiCheck(agent) {
             let kanjiData = kanjiModule.getKanjiData(parameters.kanji_single);
-            //console.log(parameters.kanji_single);
+            console.log("looking up Kanji: ", parameters.kanji_single);
             //if (kanjiData.kanji.onyomi.katakana.includes(parameters.any)) {
             if (kanjiData.kanji.onyomi.romaji.includes(parameters.any)) {
                 agent.add('✔️ Correct! ' + kanjiData.kanji.character + ' means ' + kanjiData.kanji.onyomi.katakana);
