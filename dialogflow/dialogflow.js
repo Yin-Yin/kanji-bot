@@ -39,10 +39,11 @@ module.exports = {
         function kanjiExplain(agent) {
             let kanjiData = kanjiModule.getKanjiData(parameters.kanji_single);
             console.log('kanjiData', kanjiData);
+            let cardText = 'Meaning: ' + kanjiData.kanji.meaning.english + '\n Radical: ' + kanjiData.radical.character + '\n Onyomi: ' + kanjiData.kanji.onyomi.katakana + ' (' + kanjiData.kanji.onyomi.romaji + ') \n Kunyomi: ' + kanjiData.kanji.kunyomi.hiragana + ' (' + kanjiData.kanji.kunyomi.romaji + ')';
             agent.add(new Card({
                 title: 'Kanji: ' + kanjiData.kanji.character,
                 imageUrl: kanjiData.kanji.video.poster,
-                text: 'Meaning: ' + kanjiData.kanji.meaning.english + '\n Radical: ' + kanjiData.radical.character + '\n Onyomi: ' + kanjiData.kanji.onyomi.katakana + ' (' + kanjiData.kanji.onyomi.romaji + ') \n Kunyomi: ' + kanjiData.kanji.kunyomi.hiragana + ' (' + kanjiData.kanji.kunyomi.romaji + ')'
+                text: cardText
             }));
             /*
             agent.add('Kanji: ' + kanjiData.kanji.character);
