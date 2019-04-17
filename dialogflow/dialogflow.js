@@ -168,9 +168,7 @@ module.exports = {
                 agent.add(new Suggestion('back'));
             }
             else {
-                agent.add('❌ Nhat was not correct. Try again.');
-                agent.add('❌ Sorry, no. Please try again.');
-                agent.add('❌ Please try again.');
+                agent.add('❌ Sorry, that was not correct. Please try again.');
                 //agent.add('❌ No. Actually ' + kanjiData.kanji.character + ' means ' + kanjiData.kanji.meaning.english);
                 //agent.add(new Suggestion('back'));
             }
