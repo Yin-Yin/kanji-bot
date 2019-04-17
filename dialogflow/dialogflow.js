@@ -57,7 +57,7 @@ module.exports = {
             agent.add(new Suggestion(`Radical ` + kanjiData.radical.character));
             agent.add(new Suggestion(`Examples ` + kanjiData.kanji.character));
             agent.add(new Suggestion(`Back`));
-            console.log('I am still here', agent);
+            //console.log('I am still here', agent);
         }
 
         function kanjiExamples(agent) {
@@ -230,6 +230,10 @@ module.exports = {
         intentMap.set('quiz.kanjiMeaningCheck', quizKanjiMeaningCheck);
         intentMap.set('quiz.kanjiOnyomi', quizKanjiOnyomi);
         intentMap.set('quiz.kanjiOnyomiCheck', quizKanjiOnyomiCheck);
-        agent.handleRequest(intentMap);
+        try {
+            agent.handleRequest(intentMap);
+        } catch (err) {
+            console.error(err);
+        }
     }
 };
