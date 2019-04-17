@@ -57,6 +57,7 @@ module.exports = {
             agent.add(new Suggestion(`Radical ` + kanjiData.radical.character));
             agent.add(new Suggestion(`Examples ` + kanjiData.kanji.character));
             agent.add(new Suggestion(`Back`));
+            console.log('I am still here', agent);
         }
 
         function kanjiExamples(agent) {
