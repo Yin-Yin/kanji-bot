@@ -28,7 +28,7 @@ module.exports = {
         //console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
 
         function welcome(agent) {
-            agent.add(`Welcome to my agent!`);
+            agent.add(`Welcome to the Kanjibot! :)`);
         }
 
         function fallback(agent) {
@@ -56,6 +56,7 @@ module.exports = {
             agent.add('Example:' + kanjiData.examples[0].japanese);
             agent.add(new Suggestion(`Radical ` + kanjiData.radical.character));
             agent.add(new Suggestion(`Examples ` + kanjiData.kanji.character));
+            agent.add(new Suggestion(`Menu`));
         }
 
         function kanjiExamples(agent) {
