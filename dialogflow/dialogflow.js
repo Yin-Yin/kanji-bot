@@ -22,7 +22,6 @@ module.exports = {
     handleRequest: (request, response) => {
         console.log('handleRequest invoked');
         let parameters = request.body.queryResult.parameters;
-        //return new Promise((resolve, reject) => {
 
         const agent = new WebhookClient({ request, response });
         //console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
@@ -40,6 +39,7 @@ module.exports = {
         function kanjiExplain(agent) {
             let kanjiData = kanjiModule.getKanjiData(parameters.kanji_single);
             console.log('kanjiData', kanjiData);
+
             agent.add(new Card({
                 title: 'Kanji: ' + kanjiData.kanji.character,
                 imageUrl: kanjiData.kanji.video.poster,
@@ -47,18 +47,17 @@ module.exports = {
                 //buttonText: 'Listen to example',
                 //buttonUrl: kanjiData.examples[index].audio.mp3
             }));
-            /*
-        agent.add('Kanji: ' + kanjiData.kanji.character);
-        agent.add('Meaning: ' + kanjiData.kanji.meaning.english);
-        agent.add('Radical: ' + kanjiData.radical.character);
-        agent.add('Onyomi: ' + kanjiData.kanji.onyomi.katakana + ' (' + kanjiData.kanji.onyomi.romaji + ')');
-        agent.add('Kunyomi: ' + kanjiData.kanji.kunyomi.hiragana + ' (' + kanjiData.kanji.kunyomi.romaji + ')');
-        */
+
+            agent.add('Kanji: ' + kanjiData.kanji.character);
+            agent.add('Meaning: ' + kanjiData.kanji.meaning.english);
+            agent.add('Radical: ' + kanjiData.radical.character);
+            agent.add('Onyomi: ' + kanjiData.kanji.onyomi.katakana + ' (' + kanjiData.kanji.onyomi.romaji + ')');
+            agent.add('Kunyomi: ' + kanjiData.kanji.kunyomi.hiragana + ' (' + kanjiData.kanji.kunyomi.romaji + ')');
+            /**/
             agent.add('Example:' + kanjiData.examples[0].japanese);
             agent.add(new Suggestion(`Radical ` + kanjiData.radical.character));
             agent.add(new Suggestion(`Examples ` + kanjiData.kanji.character));
             agent.add(new Suggestion(`Back`));
-            //console.log('I am still here', agent);
         }
 
         function kanjiExamples(agent) {
@@ -233,7 +232,8 @@ module.exports = {
         intentMap.set('quiz.kanjiOnyomiCheck', quizKanjiOnyomiCheck);
         try {
             agent.handleRequest(intentMap);
-        } catch (err) {
+        }
+        catch (err) {
             console.error(err);
         }
     }
