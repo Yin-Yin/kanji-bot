@@ -124,7 +124,7 @@ module.exports = {
             let solutionKanji = randomKanjis[Math.floor(Math.random() * randomKanjis.length)];
             agent.add('Choose the correct meaning of the kanji: ' + solutionKanji.kanji.character);
             for (let index in randomKanjis) {
-                agent.add(new Suggestion(solutionKanji.kanji.character + ' = ' + randomKanjis[index].kanji.meaning.english));
+                agent.add(new Suggestion(solutionKanji.kanji.character + ' means ' + randomKanjis[index].kanji.meaning.english));
             }
         }
 
