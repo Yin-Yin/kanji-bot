@@ -114,52 +114,19 @@ module.exports = {
         }
         */
 
-        function quizTest(agent) {
-            /*let randomKanji1 = kanjiModule.getRandomKanjiData();
-            let randomKanji2 = kanjiModule.getRandomKanjiData();
-            let randomKanji3 = kanjiModule.getRandomKanjiData();
-            let randomKanji4 = kanjiModule.getRandomKanjiData();*/
-            /*agent.add(new Card({
-                title: `Choose the correct meaning of the kanji: ` + randomKanji1.kanji.character,
-                imageUrl: 'https://developers.google.com/actions/images/badges/XPM_BADGING_GoogleAssistant_VER.png',
-                text: `This is the body text of a card.  You can even use line\n  breaks and emoji! 💁`,
-                buttonText: 'This is a button',
-                buttonUrl: 'https://assistant.google.com/'
-            }));*/
-            let i = 4;
+        function quizKanjiMeaning(agent) {
             let randomKanjis = []
-            while (i > 0) {
-                console.log(i);
+            for (let i = 0; i <= 4; i++) {
                 randomKanjis.push(kanjiModule.getRandomKanjiData());
-                i--;
             }
             let solutionKanji = randomKanjis[Math.floor(Math.random() * randomKanjis.length)];
             agent.add('Choose the correct meaning of the kanji: ' + solutionKanji.kanji.character);
             for (let index in randomKanjis) {
                 agent.add(new Suggestion(solutionKanji.kanji.character + ' = ' + randomKanjis[index].kanji.meaning.english));
             }
-            /*
-            // let qustionNumbers = [1, 2, 3, 4];
-            let j = 3;
-            while (j >= 0) {
-                console.log(j);
-                agent.add(new Suggestion(solutionKanji.kanji.character + ` means ` + randomKanjis[j].kanji.meaning.english));
-                // console.log(Math.floor(Math.random()*4))
-                //let randomQuestionNumber = qustionNumbers.splice(Math.floor(Math.random() * qustionNumbers.length), 1);
-                //console.log('randomQuestionNumber', randomQuestionNumber);
-                //gent.add(new Suggestion(randomKanji1.kanji.character + ` means ` + randomKanji1.kanji.meaning.english));
-                j--;
-            }
-            */
-            /*
-            agent.add(new Suggestion(randomKanji1.kanji.character + ` means ` + randomKanji1.kanji.meaning.english));
-            agent.add(new Suggestion(randomKanji1.kanji.character + ` means ` + randomKanji2.kanji.meaning.english));
-            agent.add(new Suggestion(randomKanji1.kanji.character + ` means ` + randomKanji3.kanji.meaning.english));
-            agent.add(new Suggestion(randomKanji1.kanji.character + ` means ` + randomKanji4.kanji.meaning.english));
-            */
         }
 
-        function quizCheckTest(agent) {
+        function quizKanjiMeaningCheck(agent) {
             let kanjiData = kanjiModule.getKanjiData(request.body.queryResult.parameters.kanji_single);
             //console.log(request.body.queryResult.parameters.kanji_single);
             if (kanjiData.kanji.meaning.english.includes(request.body.queryResult.parameters.any)) {
@@ -172,7 +139,35 @@ module.exports = {
                 //agent.add('❌ No. Actually ' + kanjiData.kanji.character + ' means ' + kanjiData.kanji.meaning.english);
                 //agent.add(new Suggestion('back'));
             }
-            //console.log(request.body.queryResult.parameters.any);
+        }
+
+        function quizKanjiOnyomi(agent) {
+            let randomKanjis = []
+            for (let i = 0; i <= 4; i++) {
+                randomKanjis.push(kanjiModule.getRandomKanjiData());
+            }
+            let solutionKanji = randomKanjis[Math.floor(Math.random() * randomKanjis.length)];
+            agent.add('Choose the correct Onyomi reading of the kanji: ' + solutionKanji.kanji.character);
+            for (let index in randomKanjis) {
+                agent.add(new Suggestion(solutionKanji.kanji.character + ' = ' + randomKanjis[index].kanji.onyomi.romaji));
+                //agent.add(new Suggestion(solutionKanji.kanji.character + ' = ' + randomKanjis[index].kanji.onyomi.katakana));
+            }
+        }
+
+        function quizKanjiOnyomiCheck(agent) {
+            let kanjiData = kanjiModule.getKanjiData(request.body.queryResult.parameters.kanji_single);
+            //console.log(request.body.queryResult.parameters.kanji_single);
+            //if (kanjiData.kanji.onyomi.katakana.includes(request.body.queryResult.parameters.any)) {
+            if (kanjiData.kanji.onyomi.romaji.includes(request.body.queryResult.parameters.any)) {
+                agent.add('✔️ Correct! ' + kanjiData.kanji.character + ' means ' + kanjiData.kanji.onyomi.katakana);
+                agent.add(new Suggestion('Quiz Onyomi '));
+                agent.add(new Suggestion('back'));
+            }
+            else {
+                agent.add('❌ Sorry, that was not correct. Please try again.');
+                //agent.add('❌ No. Actually ' + kanjiData.kanji.character + ' means ' + kanjiData.kanji.meaning.english);
+                //agent.add(new Suggestion('back'));
+            }
         }
 
         // ***** Menus *****
@@ -219,15 +214,17 @@ module.exports = {
         let intentMap = new Map();
         intentMap.set('Default Welcome Intent', welcome);
         intentMap.set('Default Fallback Intent', fallback);
-        
+
         intentMap.set('menu.main', menuMain);
-        
+
         intentMap.set('kanji.explain', kanjiExplain);
         intentMap.set('kanji.random', randomKanji);
         intentMap.set('kanji.examples', kanjiExamples);
-        
-        intentMap.set('quiz.start', quizTest);
-        intentMap.set('quiz.checkTest', quizCheckTest);
+
+        intentMap.set('quiz.kanjiMeaning', quizKanjiMeaning);
+        intentMap.set('quiz.kanjiMeaningCheck', quizKanjiMeaningCheck);
+        intentMap.set('quiz.kanjiOnyomi', quizKanjiOnyomi);
+        intentMap.set('quiz.kanjiOnyomiCheck', quizKanjiOnyomiCheck);
         agent.handleRequest(intentMap);
     }
 };
