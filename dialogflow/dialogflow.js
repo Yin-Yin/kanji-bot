@@ -163,10 +163,12 @@ module.exports = {
             //console.log(request.body.queryResult.parameters.kanji_single);
             if (kanjiData.kanji.meaning.english.includes(request.body.queryResult.parameters.any)) {
                 agent.add('✔️ Correct! ' + kanjiData.kanji.character + ' means ' + kanjiData.kanji.meaning.english);
-                agent.add(new Suggestion('Quiz'));
+                agent.add(new Suggestion('Another quiz?'));
+                agent.add(new Suggestion('back'));
             }
             else {
                 agent.add('❌ No. Actually ' + kanjiData.kanji.character + ' means ' + kanjiData.kanji.meaning.english);
+                agent.add(new Suggestion('back'));
             }
             //console.log(request.body.queryResult.parameters.any);
         }
