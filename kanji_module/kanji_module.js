@@ -30,6 +30,7 @@ module.exports = {
     },
     
     getKanjiData: (kanji) => {
+        console.log("Getting data for Kanji: ", kanji, ", this is the data: ", kanjiMap.get(kanji));
         return kanjiMap.get(kanji);
     },
     
