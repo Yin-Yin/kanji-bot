@@ -118,7 +118,7 @@ module.exports = {
 
         function quizKanjiMeaning(agent) {
             let randomKanjis = []
-            for (let i = 0; i <= 4; i++) {
+            for (let i = 0; i < 4; i++) {
                 randomKanjis.push(kanjiModule.getRandomKanjiData());
             }
             let solutionKanji = randomKanjis[Math.floor(Math.random() * randomKanjis.length)];
@@ -145,7 +145,7 @@ module.exports = {
 
         function quizKanjiOnyomi(agent) {
             let randomKanjis = []
-            for (let i = 0; i <= 4; i++) {
+            for (let i = 0; i < 4; i++) {
                 randomKanjis.push(kanjiModule.getRandomKanjiData());
             }
             let solutionKanji = randomKanjis[Math.floor(Math.random() * randomKanjis.length)];
