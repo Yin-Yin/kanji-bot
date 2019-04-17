@@ -168,7 +168,7 @@ module.exports = {
             }
             else {
                 agent.add('❌ No. Actually ' + kanjiData.kanji.character + ' means ' + kanjiData.kanji.meaning.english);
-                agent.add(new Suggestion('back'));
+                //agent.add(new Suggestion('back'));
             }
             //console.log(request.body.queryResult.parameters.any);
         }
