@@ -163,8 +163,8 @@ module.exports = {
             //if (kanjiData.kanji.onyomi.katakana.includes(request.body.queryResult.parameters.any)) {
             if (kanjiData.kanji.onyomi.romaji.includes(request.body.queryResult.parameters.any)) {
                 agent.add('✔️ Correct! ' + kanjiData.kanji.character + ' means ' + kanjiData.kanji.onyomi.katakana);
-                agent.add(new Suggestion('Another Onyomi quiz?'));
-                agent.add(new Suggestion('More about ' + kanjiData.kanji.character));
+                agent.add(new Suggestion('Another Onyomi quiz'));
+                agent.add(new Suggestion(kanjiData.kanji.character));
                 agent.add(new Suggestion('back'));
             }
             else {
