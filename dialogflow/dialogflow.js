@@ -21,6 +21,7 @@ const optionsKanjialiveRapidapi = {
 module.exports = {
     handleRequest: (request, response) => {
         console.log('handleRequest invoked');
+        let parameters = request.body.queryResult.parameters;
         //return new Promise((resolve, reject) => {
 
         const agent = new WebhookClient({ request, response });
@@ -37,7 +38,7 @@ module.exports = {
         }
 
         function kanjiExplain(agent) {
-            let kanjiData = kanjiModule.getKanjiData(request.body.queryResult.parameters.kanji_single);
+            let kanjiData = kanjiModule.getKanjiData(parameters.kanji_single);
             console.log('kanjiData', kanjiData);
             agent.add(new Card({
                 title: 'Kanji: ' + kanjiData.kanji.character,
@@ -61,7 +62,7 @@ module.exports = {
         }
 
         function kanjiExamples(agent) {
-            let kanjiData = kanjiModule.getKanjiData(request.body.queryResult.parameters.kanji_single);
+            let kanjiData = kanjiModule.getKanjiData(parameters.kanji_single);
             console.log('kanjiData', kanjiData);
             agent.add('Kanji: ' + kanjiData.kanji.character);
             for (let index in kanjiData.examples) {
@@ -100,7 +101,7 @@ module.exports = {
         /*
         function translate(agent) {
             return new Promise((resolve, reject) => {
-                optionsKanjialiveRapidapi.path = '/api/public/kanji/' + encodeURIComponent(request.body.queryResult.parameters.kanji_single);
+                optionsKanjialiveRapidapi.path = '/api/public/kanji/' + encodeURIComponent(parameters.kanji_single);
                 utilsModule.makeHttpsRequest(optionsKanjialiveRapidapi).then(
                     resData => {
                         console.log('resData', resData);
@@ -130,9 +131,9 @@ module.exports = {
         }
 
         function quizKanjiMeaningCheck(agent) {
-            let kanjiData = kanjiModule.getKanjiData(request.body.queryResult.parameters.kanji_single);
-            //console.log(request.body.queryResult.parameters.kanji_single);
-            if (kanjiData.kanji.meaning.english.includes(request.body.queryResult.parameters.any)) {
+            let kanjiData = kanjiModule.getKanjiData(parameters.kanji_single);
+            //console.log(parameters.kanji_single);
+            if (kanjiData.kanji.meaning.english.includes(parameters.any)) {
                 agent.add('✔️ Correct! ' + kanjiData.kanji.character + ' means ' + kanjiData.kanji.meaning.english);
                 agent.add(new Suggestion('Another quiz?'));
                 agent.add(new Suggestion('back'));
@@ -158,10 +159,10 @@ module.exports = {
         }
 
         function quizKanjiOnyomiCheck(agent) {
-            let kanjiData = kanjiModule.getKanjiData(request.body.queryResult.parameters.kanji_single);
-            //console.log(request.body.queryResult.parameters.kanji_single);
-            //if (kanjiData.kanji.onyomi.katakana.includes(request.body.queryResult.parameters.any)) {
-            if (kanjiData.kanji.onyomi.romaji.includes(request.body.queryResult.parameters.any)) {
+            let kanjiData = kanjiModule.getKanjiData(parameters.kanji_single);
+            //console.log(parameters.kanji_single);
+            //if (kanjiData.kanji.onyomi.katakana.includes(parameters.any)) {
+            if (kanjiData.kanji.onyomi.romaji.includes(parameters.any)) {
                 agent.add('✔️ Correct! ' + kanjiData.kanji.character + ' means ' + kanjiData.kanji.onyomi.katakana);
                 agent.add(new Suggestion('Another Onyomi quiz'));
                 agent.add(new Suggestion(kanjiData.kanji.character));
